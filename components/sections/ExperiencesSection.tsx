@@ -21,7 +21,7 @@ export function ExperiencesSection() {
     <section
       id="excursiones"
       aria-label="Excursiones destacadas"
-      className="relative overflow-hidden bg-[var(--neutral-50)]"
+      className="relative scroll-mt-24 overflow-hidden bg-[var(--neutral-50)] md:scroll-mt-28"
     >
       {/* Noise texture */}
       <div

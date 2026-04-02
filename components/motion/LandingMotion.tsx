@@ -172,7 +172,7 @@ export function LandingMotion() {
               },
             });
 
-            reveal("#instagram [data-reveal]", {
+            reveal("#instagram [data-reveal]:not(.insta-item)", {
               y: 22,
               stagger: 0.06,
               start: "top 85%",
@@ -181,6 +181,7 @@ export function LandingMotion() {
             gsap.from(".insta-item", {
               opacity: 0,
               scale: 0.92,
+              y: 18,
               duration: 0.58,
               stagger: 0.06,
               ease: "power2.out",

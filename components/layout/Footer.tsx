@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { footerLinks } from "@/content/navigation";
 import { generateWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 
 export function Footer() {
@@ -25,26 +26,13 @@ export function Footer() {
             Navegacion
           </h3>
           <ul className="mt-4 space-y-2 text-sm">
-            <li>
-              <Link href="/" className="hover:text-[var(--brand-accent-1)]">
-                Inicio
-              </Link>
-            </li>
-            <li>
-              <Link href="/excursiones" className="hover:text-[var(--brand-accent-1)]">
-                Excursiones
-              </Link>
-            </li>
-            <li>
-              <Link href="/excursiones?categoria=atraccion" className="hover:text-[var(--brand-accent-1)]">
-                Atractivos
-              </Link>
-            </li>
-            <li>
-              <Link href="/excursiones?categoria=traslado" className="hover:text-[var(--brand-accent-1)]">
-                Traslados
-              </Link>
-            </li>
+            {footerLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="hover:text-[var(--brand-accent-1)]">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 

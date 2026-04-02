@@ -11,7 +11,7 @@ export function DifferentialsSection() {
     <section
       id="diferenciales"
       aria-label="Nuestros diferenciales"
-      className="relative overflow-hidden bg-[var(--neutral-950)] px-5 py-[var(--home-section-y)] text-[var(--text-on-dark)] md:px-8 md:py-[var(--home-section-y-lg)]"
+      className="relative scroll-mt-24 overflow-hidden bg-[var(--neutral-950)] px-5 py-[var(--home-section-y)] text-[var(--text-on-dark)] md:px-8 md:py-[var(--home-section-y-lg)] md:scroll-mt-28"
     >
       {/* Noise texture */}
       <div

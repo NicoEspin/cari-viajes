@@ -35,7 +35,7 @@ export function HeroSection() {
     <section
       id="hero"
       aria-label="Inicio"
-      className="hero-section relative flex min-h-[88svh] items-end overflow-hidden bg-[var(--ink)] px-5 pb-16 pt-24 text-[var(--sand)] sm:min-h-[92svh] md:min-h-[100dvh] md:px-10 md:pb-20 md:pt-28"
+      className="hero-section relative flex min-h-[88svh] scroll-mt-24 items-end overflow-hidden bg-[var(--ink)] px-5 pb-16 pt-24 text-[var(--sand)] sm:min-h-[92svh] md:min-h-[100dvh] md:px-10 md:pb-20 md:pt-28 md:scroll-mt-28"
     >
       <div aria-hidden="true" className="hero-media absolute inset-0">
         <Image

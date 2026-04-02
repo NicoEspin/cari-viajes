@@ -82,13 +82,13 @@ export function InstagramSection() {
         </div>
 
         <div
-          className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-2 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 xl:grid-cols-3"
-          data-reveal
+          className="instagram-feed-track -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-2 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 xl:grid-cols-3"
         >
           {INSTAGRAM_POSTS.map((postUrl) => (
             <div
               key={postUrl}
-              className="instagram-embed-card flex w-[min(24rem,calc(100vw-3rem))] shrink-0 snap-center justify-center py-2 first:snap-start last:snap-end md:w-auto md:shrink md:snap-none"
+              className="insta-item instagram-embed-card flex w-[min(24rem,calc(100vw-3rem))] shrink-0 snap-center justify-center py-2 first:snap-start last:snap-end md:w-auto md:shrink md:snap-none"
+              data-reveal
             >
               <blockquote
                 className="instagram-media !m-0 !min-w-0 w-full"

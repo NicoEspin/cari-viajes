@@ -50,6 +50,8 @@ function FilterPill({ href, active, label }: { href: string; active: boolean; la
   return (
     <Link
       href={href}
+      replace
+      scroll={false}
       className={`inline-flex min-h-11 items-center border px-4 py-2 text-[0.68rem] font-semibold tracking-[0.18em] uppercase transition-all duration-200 ${
         active
           ? "border-[var(--text-primary)] bg-[var(--text-primary)] text-white"

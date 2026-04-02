@@ -8,7 +8,7 @@ export function FaqSection() {
     <section
       id="faq"
       aria-label="Preguntas frecuentes"
-      className="relative overflow-hidden bg-[var(--neutral-50)] px-5 py-[var(--home-section-y)] md:px-10 md:py-[var(--home-section-y-lg)]"
+      className="relative scroll-mt-24 overflow-hidden bg-[var(--neutral-50)] px-5 py-[var(--home-section-y)] md:px-10 md:py-[var(--home-section-y-lg)] md:scroll-mt-28"
     >
       <div className="mx-auto w-full max-w-[1200px]">
         {/* Header — full width, generous */}
