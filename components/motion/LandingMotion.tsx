@@ -17,6 +17,14 @@ export function LandingMotion() {
 
       gsap.registerPlugin(ScrollTrigger);
       const mm = gsap.matchMedia();
+      const heroSequence = [
+        ".hero-eyebrow",
+        ".hero-heading",
+        ".hero-support-copy",
+        ".hero-actions > *",
+        ".hero-note",
+        ".hero-pill",
+      ];
 
       mm.add(
         {
@@ -29,198 +37,198 @@ export function LandingMotion() {
             desktop: boolean;
           };
 
-          if (reduceMotion) return;
-
-          const ctx = gsap.context(() => {
-            const reveal = (
-              target: string,
-              options?: { y?: number; duration?: number; stagger?: number; start?: string },
-            ) => {
-              gsap.from(target, {
-                opacity: 0,
-                y: options?.y ?? 28,
-                duration: options?.duration ?? 0.72,
-                ease: "power2.out",
-                stagger: options?.stagger,
-                scrollTrigger: {
-                  trigger: target,
-                  start: options?.start ?? "top 88%",
-                  once: true,
-                },
-              });
-            };
-
-            const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-
-            gsap.set(".hero-actions-desktop > *, .hero-actions-mobile > *", {
-              autoAlpha: 1,
-            });
-
-            tl.from(".hero-eyebrow", { autoAlpha: 0, y: 10, duration: 0.54 })
-              .from(
-                ".hero-heading",
-                { autoAlpha: 0, y: 22, duration: 0.72 },
-                "-=0.18",
-              )
-              .from(
-                ".hero-support-copy",
-                { autoAlpha: 0, y: 14, duration: 0.55 },
-                "-=0.28",
-              )
-              .fromTo(
-                ".hero-actions-desktop > *, .hero-actions-mobile > *",
-                { autoAlpha: 0, y: 12 },
-                {
-                  autoAlpha: 1,
-                  y: 0,
-                  duration: 0.5,
-                  stagger: 0.08,
-                  clearProps: "opacity,visibility,transform",
-                },
-                "-=0.22",
-              )
-              .from(
-                ".hero-right",
-                { autoAlpha: 0, y: 16, duration: 0.58 },
-                "-=0.32",
-              )
-              .from(
-                ".hero-microcopy",
-                { autoAlpha: 0, duration: 0.34 },
-                "-=0.18",
-              )
-              .from(
-                ".stat-cell",
-                { autoAlpha: 0, y: 16, duration: 0.4, stagger: 0.06 },
-                "-=0.18",
-              )
-              .from(
-                ".scroll-hint",
-                { autoAlpha: 0, duration: 0.28 },
-                "-=0.1",
-              );
-
-            reveal("#propuesta [data-reveal]", { y: 24, stagger: 0.12, start: "top 82%" });
-            reveal("#excursiones [data-reveal]:not(.experience-card)", {
-              y: 24,
-              stagger: 0.1,
-              start: "top 84%",
-            });
-            reveal(".experience-card", { y: 36, stagger: 0.12, start: "top 80%" });
-
-            reveal("#diferenciales [data-reveal]", {
-              y: 28,
-              stagger: 0.12,
-              start: "top 84%",
-            });
-
-            gsap.from(".differential-number", {
-              opacity: 0,
-              y: 80,
-              duration: 0.9,
-              stagger: 0.14,
-              ease: "power2.out",
+          const reveal = (
+            target: string,
+            options?: { y?: number; duration?: number; stagger?: number; start?: string },
+          ) => {
+            gsap.from(target, {
+              autoAlpha: 0,
+              y: options?.y ?? 28,
+              duration: options?.duration ?? 0.8,
+              ease: "power3.out",
+              stagger: options?.stagger,
               scrollTrigger: {
-                trigger: "#diferenciales",
-                start: "top 75%",
+                trigger: target,
+                start: options?.start ?? "top 88%",
                 once: true,
               },
+              clearProps: "opacity,visibility,transform",
             });
+          };
 
-            gsap.from(".differential-icon", {
-              opacity: 0,
-              scale: 0.84,
-              duration: 0.5,
-              stagger: 0.1,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: "#diferenciales",
-                start: "top 78%",
-                once: true,
+          if (reduceMotion) {
+            gsap.set(heroSequence, { clearProps: "all" });
+            return;
+          }
+
+          gsap.set(heroSequence, { autoAlpha: 0, y: 18 });
+
+          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+          tl.to(".hero-eyebrow", {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.52,
+            clearProps: "opacity,visibility,transform",
+          })
+            .to(
+              ".hero-heading",
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.78,
+                clearProps: "opacity,visibility,transform",
               },
-            });
-
-            reveal("#testimonios [data-reveal]", {
-              y: 24,
-              stagger: 0.08,
-              start: "top 84%",
-            });
-            reveal(".metric-card", { y: 24, stagger: 0.08, start: "top 86%" });
-
-            reveal("#contacto [data-reveal]", {
-              y: 26,
-              stagger: 0.12,
-              start: "top 82%",
-            });
-
-            gsap.from("#contacto .cta-main-button", {
-              opacity: 0,
-              y: 16,
-              scale: 0.93,
-              duration: 0.72,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: "#contacto",
-                start: "top 82%",
-                once: true,
+              "-=0.2",
+            )
+            .to(
+              ".hero-support-copy",
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.58,
+                clearProps: "opacity,visibility,transform",
               },
-              onComplete: () => {
-                gsap.to("#contacto .cta-main-button", {
-                  keyframes: [{ scale: 1.03, duration: 0.22 }, { scale: 1, duration: 0.2 }],
-                  ease: "power2.inOut",
-                });
+              "-=0.42",
+            )
+            .to(
+              ".hero-actions > *",
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.52,
+                stagger: 0.08,
+                clearProps: "opacity,visibility,transform",
               },
-            });
-
-            reveal("#instagram [data-reveal]:not(.insta-item)", {
-              y: 22,
-              stagger: 0.06,
-              start: "top 85%",
-            });
-
-            gsap.from(".insta-item", {
-              opacity: 0,
-              scale: 0.92,
-              y: 18,
-              duration: 0.58,
-              stagger: 0.06,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: "#instagram",
-                start: "top 80%",
-                once: true,
+              "-=0.3",
+            )
+            .to(
+              ".hero-note",
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.54,
+                clearProps: "opacity,visibility,transform",
               },
-            });
+              "-=0.22",
+            )
+            .to(
+              ".hero-pill",
+              {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.48,
+                stagger: 0.06,
+                clearProps: "opacity,visibility,transform",
+              },
+              "-=0.34",
+            );
 
-            reveal("#faq [data-reveal]", { y: 22, stagger: 0.08, start: "top 86%" });
+          reveal("#propuesta [data-reveal]", { y: 24, stagger: 0.12, start: "top 82%" });
+          reveal("#excursiones [data-reveal]:not(.experience-card)", {
+            y: 24,
+            stagger: 0.1,
+            start: "top 84%",
+          });
+          reveal(".experience-card", { y: 32, stagger: 0.1, start: "top 80%" });
 
-            if (desktop) {
-              gsap.to(".hero-media", {
-                yPercent: 12,
-                scale: 1.04,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: "#hero",
-                  start: "top top",
-                  end: "bottom top",
-                  scrub: true,
-                },
-              });
-
-              gsap.to(".hero-overlay", {
-                yPercent: 18,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: "#hero",
-                  start: "top top",
-                  end: "bottom top",
-                  scrub: true,
-                },
-              });
-            }
+          reveal("#diferenciales [data-reveal]", {
+            y: 28,
+            stagger: 0.12,
+            start: "top 84%",
           });
 
-          return () => ctx.revert();
+          gsap.from(".differential-number", {
+            autoAlpha: 0,
+            y: 56,
+            duration: 0.82,
+            stagger: 0.12,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: "#diferenciales",
+              start: "top 76%",
+              once: true,
+            },
+            clearProps: "opacity,visibility,transform",
+          });
+
+          gsap.from(".differential-icon", {
+            autoAlpha: 0,
+            scale: 0.9,
+            duration: 0.48,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#diferenciales",
+              start: "top 79%",
+              once: true,
+            },
+            clearProps: "opacity,visibility,transform",
+          });
+
+          reveal("#testimonios [data-reveal]", {
+            y: 24,
+            stagger: 0.08,
+            start: "top 84%",
+          });
+          reveal(".metric-card", { y: 20, stagger: 0.08, start: "top 86%" });
+
+          reveal("#contacto [data-reveal]", {
+            y: 24,
+            stagger: 0.1,
+            start: "top 82%",
+          });
+
+          gsap.from("#contacto .cta-main-button", {
+            autoAlpha: 0,
+            y: 14,
+            scale: 0.96,
+            duration: 0.64,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: "#contacto",
+              start: "top 82%",
+              once: true,
+            },
+            clearProps: "opacity,visibility,transform",
+          });
+
+          reveal("#instagram [data-reveal]:not(.insta-item)", {
+            y: 20,
+            stagger: 0.06,
+            start: "top 85%",
+          });
+
+          gsap.from(".insta-item", {
+            autoAlpha: 0,
+            scale: 0.95,
+            y: 16,
+            duration: 0.54,
+            stagger: 0.05,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#instagram",
+              start: "top 80%",
+              once: true,
+            },
+            clearProps: "opacity,visibility,transform",
+          });
+
+          reveal("#faq [data-reveal]", { y: 20, stagger: 0.08, start: "top 86%" });
+
+          if (desktop) {
+            gsap.to(".hero-media", {
+              yPercent: 6,
+              scale: 1.02,
+              ease: "none",
+              scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          }
         },
       );
 

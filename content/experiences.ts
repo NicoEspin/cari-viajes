@@ -15,6 +15,7 @@ export type Experience = {
   duration: string;
   badge?: string;
   featured: boolean;
+  whatsappMessage: string;
 };
 
 function toExperience(excursion: Excursion): Experience {
@@ -33,6 +34,7 @@ function toExperience(excursion: Excursion): Experience {
     duration: excursion.duration,
     badge: excursion.badge,
     featured: excursion.featuredHome,
+    whatsappMessage: excursion.whatsappMessage,
   };
 }
 

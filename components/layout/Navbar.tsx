@@ -296,8 +296,8 @@ export function Navbar() {
             <div  className="hidden px-5 py-2.5 text-[0.72rem] md:inline-flex">
           {/* FIX 5: WhatsApp button solo en desktop — en mobile vive dentro del menú */}
           <WhatsAppButton
-            message={whatsappMessages.hero}
-           
+            message={whatsappMessages.nav}
+            
             ariaLabel="Escribir por WhatsApp"
           >
             <span className="tracking-[0.1em] uppercase">Escribinos</span>
@@ -441,7 +441,7 @@ export function Navbar() {
                 </div>
 
                 <WhatsAppButton
-                  message={whatsappMessages.hero}
+                  message={whatsappMessages.nav}
                   onClick={closeMenu}
                   ariaLabel="Escribir por WhatsApp desde el menu"
                   className="w-full justify-center bg-[var(--sand)] text-[var(--ink)] hover:border-[var(--brand-accent-1)] hover:bg-[var(--brand-accent-1)] hover:text-[var(--ink)] hover:shadow-[0_0_24px_rgba(236,249,62,0.24)]"

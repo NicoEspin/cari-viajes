@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import excursionsHeroImage from "@/app/assets/excurciones-hero.webp";
 import {
   excursionCategoryFilters,
   excursionCategoryLabels,
@@ -10,6 +11,7 @@ import {
 } from "@/content/excursions";
 import { whatsappMessages } from "@/lib/whatsapp";
 import { getExcursionAssetBySlug } from "@/lib/excursion-assets";
+import { excursionDetailCtaClassName } from "@/components/excursions/detailCtaStyles";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { EditorialVisual } from "@/components/ui/EditorialVisual";
@@ -94,7 +96,7 @@ function FilterPill({ href, active, label }: { href: string; active: boolean; la
       scroll={false}
       className={`inline-flex min-h-11 items-center border px-4 py-2 text-[0.68rem] font-semibold tracking-[0.18em] uppercase transition-all duration-200 ${
         active
-          ? "border-[var(--text-primary)] bg-[var(--text-primary)] text-white"
+          ? "border-[var(--brand-primary)] bg-[var(--brand-primary)] text-white"
           : "border-[var(--border-default)] bg-white text-[var(--text-muted)] hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)]"
       }`}
     >
@@ -222,7 +224,7 @@ function ExcursionEditorialCard({
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
             href={`/excursiones/${excursion.slug}`}
-            className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2"
+            className={excursionDetailCtaClassName}
           >
             Ver detalle
           </Link>
@@ -293,7 +295,7 @@ function ExcursionRailCard({ excursion, index }: { excursion: Excursion; index: 
         <div className="mt-6 flex flex-col gap-3">
           <Link
             href={`/excursiones/${excursion.slug}`}
-            className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2"
+            className={excursionDetailCtaClassName}
           >
             Ver recorrido
           </Link>
@@ -347,7 +349,7 @@ function ExcursionSplitCard({ excursion, mirrored }: { excursion: Excursion; mir
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
             href={`/excursiones/${excursion.slug}`}
-            className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2"
+            className={excursionDetailCtaClassName}
           >
             Abrir ficha completa
           </Link>
@@ -379,12 +381,20 @@ export function ExcursionsIndexPage({
   return (
     <main className="bg-[var(--neutral-50)]">
       <section className="relative isolate flex min-h-[100dvh] items-start overflow-hidden border-b border-[var(--border-default)] bg-[var(--neutral-950)] px-5 pb-12 pt-24 text-[var(--text-on-dark)] md:min-h-screen md:px-10 md:pb-16 md:pt-28">
+        <Image
+          src={excursionsHeroImage}
+          alt="Vista panoramica de excursiones en Carlos Paz y las sierras de Cordoba"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 16% 24%, rgba(252,203,62,0.16) 0%, transparent 24%), radial-gradient(circle at 78% 18%, rgba(4,139,114,0.24) 0%, transparent 30%), linear-gradient(180deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+              "linear-gradient(180deg, rgba(7,12,17,0.34) 0%, rgba(7,12,17,0.54) 42%, rgba(7,12,17,0.8) 100%), radial-gradient(circle at 16% 24%, rgba(252,203,62,0.14) 0%, transparent 24%), radial-gradient(circle at 78% 18%, rgba(4,139,114,0.2) 0%, transparent 30%), linear-gradient(180deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
             backgroundSize: "auto, auto, 100% 92px",
           }}
         />

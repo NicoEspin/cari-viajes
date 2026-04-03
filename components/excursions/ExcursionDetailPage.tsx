@@ -5,6 +5,7 @@ import {
   getRelatedExcursions,
   type Excursion,
 } from "@/content/excursions";
+import { excursionDetailCtaClassName } from "@/components/excursions/detailCtaStyles";
 import { EditorialVisual } from "@/components/ui/EditorialVisual";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -256,10 +257,9 @@ export function ExcursionDetailPage({ excursion }: { excursion: Excursion }) {
                 <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">{item.teaser}</p>
                 <Link
                   href={`/excursiones/${item.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--brand-primary)] transition-[gap] hover:gap-3"
+                  className={`mt-6 ${excursionDetailCtaClassName}`}
                 >
                   Ver detalle
-                  <span aria-hidden="true">-&gt;</span>
                 </Link>
               </article>
             ))}

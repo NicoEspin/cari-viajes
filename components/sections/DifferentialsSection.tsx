@@ -143,7 +143,7 @@ export function DifferentialsSection() {
                   style={{ borderColor: "rgba(255,255,255,0.08)" }}
                 >
                   <WhatsAppButton
-                    message={whatsappMessages.hero}
+                    message={whatsappMessages.fallback}
                     ariaLabel={`Preguntar por ${item.title} en WhatsApp`}
                     className="inline-flex items-center gap-2 text-[9px] tracking-[0.18em] uppercase transition-[gap] duration-300 hover:gap-3"
                     style={{

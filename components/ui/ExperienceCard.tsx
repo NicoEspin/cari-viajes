@@ -1,6 +1,5 @@
 import { Clock3, Route } from "lucide-react";
 import type { Experience } from "@/content/experiences";
-import { whatsappMessages } from "@/lib/whatsapp";
 import { WhatsAppButton } from "./WhatsAppButton";
 
 type ExperienceCardProps = {
@@ -90,7 +89,7 @@ export function ExperienceCard({ experience, index, highlight }: ExperienceCardP
             </div>
 
             <WhatsAppButton
-              message={whatsappMessages.byExperience(experience.title)}
+              message={experience.whatsappMessage}
               className="px-4 py-2 text-xs"
               ariaLabel={`Consultar por ${experience.title} en WhatsApp`}
             >

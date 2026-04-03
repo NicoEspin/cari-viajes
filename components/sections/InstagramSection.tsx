@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { useEffect } from "react";
+import { socialLinks } from "@/content/social";
 
 declare global {
   interface Window {
@@ -63,7 +64,7 @@ export function InstagramSection() {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-display text-lg font-normal text-[var(--text-primary)]">
-                  @cari.turismo.vcp
+                  {socialLinks.instagram.handle}
                 </span>
                 <span className="rounded-full bg-[var(--neutral-100)] px-2 py-0.5 text-[10px] font-medium uppercase tracking-widest text-[var(--text-muted)]">
                   Oficial
@@ -111,7 +112,7 @@ export function InstagramSection() {
             Seguinos para ver cada destino antes de decidir.
           </p>
           <Link
-            href="https://www.instagram.com/cari.turismo.vcp/"
+            href={socialLinks.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"

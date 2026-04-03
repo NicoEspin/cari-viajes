@@ -1,4 +1,5 @@
 import { getExcursionHeroImageSrc } from "@/lib/excursion-assets";
+import { getExcursionWhatsAppMessage } from "@/lib/whatsapp";
 
 export type ExcursionCategory = "atraccion" | "excursion" | "traslado";
 
@@ -65,6 +66,8 @@ export type Excursion = {
   whatsappMessage: string;
 };
 
+type ExcursionRecord = Omit<Excursion, "whatsappMessage">;
+
 export const excursionCategoryLabels: Record<ExcursionCategory, string> = {
   atraccion: "Atraccion",
   excursion: "Excursion",
@@ -91,7 +94,7 @@ function buildExcursionImageSet(slug: string) {
   };
 }
 
-export const excursions: Excursion[] = [
+const excursionRecords: ExcursionRecord[] = [
   {
     slug: "city-tour-lacustre",
     ...buildExcursionImageSet("city-tour-lacustre"),
@@ -167,8 +170,6 @@ export const excursions: Excursion[] = [
     seoTitle: "City Tour Lacustre en Carlos Paz | Cari Turismo",
     seoDescription:
       "Reserva el City Tour Lacustre en Carlos Paz con guia, musica en vivo y opcion de traslado. Un plan corto y premium para vivir el lago San Roque.",
-    whatsappMessage:
-      "Hola! Quiero info y disponibilidad del City Tour Lacustre. Me cuentan horarios, reserva y si tienen traslado?",
   },
   {
     slug: "bar-de-hielo",
@@ -244,8 +245,6 @@ export const excursions: Excursion[] = [
     seoTitle: "Bar de Hielo en Carlos Paz | Mundo Irreal + Cari Turismo",
     seoDescription:
       "Conoce el Bar de Hielo de Carlos Paz con ingreso a Mundo Irreal, vestuario incluido y barra libre. Reserva facil por WhatsApp con Cari Turismo.",
-    whatsappMessage:
-      "Hola! Quiero reservar Bar de Hielo + Mundo Irreal. Me cuentan horarios, que incluye y si tienen traslado?",
   },
   {
     slug: "aerosilla",
@@ -322,8 +321,6 @@ export const excursions: Excursion[] = [
     seoTitle: "Aerosilla en Carlos Paz | Vistas panoramicas con Cari Turismo",
     seoDescription:
       "Subi a la Aerosilla de Carlos Paz con compra anticipada y opcion de traslado. Un clasico panoramico para ver la ciudad y el Valle de Punilla.",
-    whatsappMessage:
-      "Hola! Me interesa la Aerosilla. Quiero saber horarios, compra anticipada y si tienen traslado desde el hotel.",
   },
   {
     slug: "city-bus-turistico-grupos",
@@ -398,8 +395,6 @@ export const excursions: Excursion[] = [
     seoTitle: "City Bus Turistico para grupos en Carlos Paz | Cari Turismo",
     seoDescription:
       "Organiza un City Bus Turistico para grupos en Carlos Paz con guia, show humoristico musical y servicio puerta a puerta desde el hotel.",
-    whatsappMessage:
-      "Hola! Necesito info para organizar el City Bus Turistico para un grupo. Me cuentan disponibilidad, minimo y como funciona el puerta a puerta?",
   },
   {
     slug: "valle-de-punilla",
@@ -474,8 +469,6 @@ export const excursions: Excursion[] = [
     seoTitle: "Excursion Valle de Punilla | Medio dia desde Carlos Paz",
     seoDescription:
       "Descubre el Valle de Punilla en una excursion de medio dia desde Carlos Paz con puerta a puerta, paradas clasicas y opcion de sumar Los Cocos.",
-    whatsappMessage:
-      "Hola! Quiero saber disponibilidad de la excursion Valle de Punilla. Me cuentan que incluye y como es el puerta a puerta?",
   },
   {
     slug: "dique-los-molinos-villa-general-belgrano",
@@ -554,8 +547,6 @@ export const excursions: Excursion[] = [
     seoTitle: "Dique Los Molinos y Villa General Belgrano | Cari Turismo",
     seoDescription:
       "Reserva la excursion de medio dia al Dique Los Molinos con Villa General Belgrano, degustacion artesanal y city tour por Alta Gracia.",
-    whatsappMessage:
-      "Hola! Quiero info de la excursion Dique Los Molinos con Villa General Belgrano. Me cuentan disponibilidad y que incluye?",
   },
   {
     slug: "la-cumbrecita-villa-general-belgrano",
@@ -640,8 +631,6 @@ export const excursions: Excursion[] = [
     seoTitle: "La Cumbrecita con Villa General Belgrano | Excursion full day",
     seoDescription:
       "Vive La Cumbrecita con Villa General Belgrano en una excursion full day desde Carlos Paz: senderos, cascada, degustacion y puerta a puerta.",
-    whatsappMessage:
-      "Hola! Quiero reservar la excursion a La Cumbrecita con Villa General Belgrano. Me cuentan disponibilidad y como es el recorrido?",
   },
   {
     slug: "altas-cumbres-tuneles",
@@ -718,8 +707,6 @@ export const excursions: Excursion[] = [
     seoTitle: "Altas Cumbres con Los Tuneles | Excursion desde Carlos Paz",
     seoDescription:
       "Descubre Altas Cumbres con Los Tuneles desde Carlos Paz. Una excursion full day con vistas imponentes, Mina Clavero y Cura Brochero.",
-    whatsappMessage:
-      "Hola! Quiero saber disponibilidad para Altas Cumbres con Los Tuneles. Me cuentan que incluye y si hay almuerzo opcional?",
   },
   {
     slug: "cascada-escondida",
@@ -796,8 +783,6 @@ export const excursions: Excursion[] = [
     seoTitle: "Cascada Escondida en Altas Cumbres | Turismo aventura",
     seoDescription:
       "Vive Cascada Escondida desde Carlos Paz con caminata, kayak, cabalgata y balneario. Disponible solo en verano con Cari Turismo.",
-    whatsappMessage:
-      "Hola! Quiero info de Cascada Escondida. Me cuentan disponibilidad, nivel de dificultad y que actividades incluye?",
   },
   {
     slug: "traslados-especiales",
@@ -875,10 +860,13 @@ export const excursions: Excursion[] = [
     seoTitle: "Traslados especiales en Carlos Paz | Cari Turismo",
     seoDescription:
       "Coordina traslados especiales en Carlos Paz para turismo, eventos o grupos. Servicio comodo, seguro y a medida con conocimiento local.",
-    whatsappMessage:
-      "Hola! Necesito cotizar un traslado especial en Carlos Paz. Les paso cantidad de personas, recorrido y horario?",
   },
 ];
+
+export const excursions: Excursion[] = excursionRecords.map((excursion) => ({
+  ...excursion,
+  whatsappMessage: getExcursionWhatsAppMessage(excursion),
+}));
 
 export function getExcursionBySlug(slug: string) {
   return excursions.find((excursion) => excursion.slug === slug);

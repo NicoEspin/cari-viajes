@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { footerLinks } from "@/content/navigation";
+import { socialLinks } from "@/content/social";
 import { generateWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 
 export function Footer() {
@@ -42,7 +43,7 @@ export function Footer() {
           </h3>
           <div className="mt-4 space-y-3 text-sm">
             <a
-              href={generateWhatsAppLink(whatsappMessages.hero)}
+              href={generateWhatsAppLink(whatsappMessages.fallback)}
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-[var(--brand-accent-1)]"
@@ -50,12 +51,12 @@ export function Footer() {
               WhatsApp
             </a>
             <Link
-              href="https://instagram.com/cariturismo"
+              href={socialLinks.instagram.url}
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-[var(--brand-accent-1)]"
             >
-              Instagram
+              {socialLinks.instagram.handle}
             </Link>
           </div>
         </div>
