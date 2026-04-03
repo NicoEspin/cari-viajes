@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   excursionCategoryFilters,
@@ -8,6 +9,7 @@ import {
   type Excursion,
 } from "@/content/excursions";
 import { whatsappMessages } from "@/lib/whatsapp";
+import { getExcursionAssetBySlug } from "@/lib/excursion-assets";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { EditorialVisual } from "@/components/ui/EditorialVisual";
@@ -29,6 +31,44 @@ const BENEFITS = [
       "Comprando excursiones de medio dia o dia completo accedes a ventajas exclusivas en actividades urbanas seleccionadas.",
   },
 ];
+
+function getExcursionAsset(excursion: Excursion) {
+  return getExcursionAssetBySlug(excursion.slug);
+}
+
+function getExcursionAlt(excursion: Excursion) {
+  return `${excursion.title} en ${excursion.location}`;
+}
+
+function ExcursionAssetImage({
+  excursion,
+  sizes,
+  imageClassName,
+  priority,
+}: {
+  excursion: Excursion;
+  sizes: string;
+  imageClassName?: string;
+  priority?: boolean;
+}) {
+  const asset = getExcursionAsset(excursion);
+
+  if (!asset) {
+    return null;
+  }
+
+  return (
+    <Image
+      src={asset.image}
+      alt={getExcursionAlt(excursion)}
+      fill
+      priority={priority}
+      sizes={sizes}
+      className={`object-cover ${imageClassName ?? ""}`}
+      style={{ objectPosition: asset.objectPosition ?? "center center" }}
+    />
+  );
+}
 
 function buildFilterHref(category: string, rhythm: string) {
   const params = new URLSearchParams();
@@ -63,6 +103,60 @@ function FilterPill({ href, active, label }: { href: string; active: boolean; la
   );
 }
 
+function ExcursionMediaPanel({
+  excursion,
+  title,
+  meta,
+  sizes,
+  className,
+  imageClassName,
+  overlayContentClassName,
+  priority,
+}: {
+  excursion: Excursion;
+  title: string;
+  meta: string;
+  sizes: string;
+  className?: string;
+  imageClassName?: string;
+  overlayContentClassName?: string;
+  priority?: boolean;
+}) {
+  const asset = getExcursionAsset(excursion);
+
+  if (!asset) {
+    return (
+      <EditorialVisual
+        visual={excursion.visual}
+        title={title}
+        meta={meta}
+        className={className}
+      />
+    );
+  }
+
+  return (
+    <div className={`relative overflow-hidden bg-[var(--neutral-200)] ${className ?? ""}`}>
+      <ExcursionAssetImage
+        excursion={excursion}
+        sizes={sizes}
+        imageClassName={imageClassName}
+        priority={priority}
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,12,17,0.08)_0%,rgba(7,12,17,0.2)_35%,rgba(7,12,17,0.68)_100%)]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,rgba(252,203,62,0.85),rgba(4,139,114,0.75),transparent)]" />
+      <div
+        className={`absolute inset-x-0 bottom-0 p-5 text-white md:p-6 ${overlayContentClassName ?? ""}`}
+      >
+        <p className="text-[0.58rem] tracking-[0.24em] uppercase text-white/72">{meta}</p>
+        <h3 className="mt-3 max-w-[12ch] font-display text-[1.8rem] leading-[0.98] md:text-[2.3rem]">
+          {title}
+        </h3>
+      </div>
+    </div>
+  );
+}
+
 function ExcursionEditorialCard({
   excursion,
   priority,
@@ -70,14 +164,42 @@ function ExcursionEditorialCard({
   excursion: Excursion;
   priority: string;
 }) {
+  const asset = getExcursionAsset(excursion);
+
   return (
-    <article className="grid gap-px overflow-hidden border border-[var(--border-default)] bg-[var(--border-default)] lg:grid-cols-[1.1fr_0.9fr]">
-      <EditorialVisual
-        visual={excursion.visual}
-        title={excursion.editorialTitle}
-        meta={excursion.heroKicker}
-        className="min-h-[320px]"
-      />
+    <article className="grid gap-px overflow-hidden border border-[var(--border-default)] bg-[var(--border-default)] lg:grid-cols-[1.16fr_0.84fr]">
+      <div className="relative min-h-[320px] overflow-hidden bg-[var(--neutral-950)] md:min-h-[420px] lg:min-h-[600px]">
+        {asset ? (
+          <>
+            <div className="absolute inset-0 bg-[var(--neutral-200)]">
+              <Image
+                src={asset.image}
+                alt={getExcursionAlt(excursion)}
+                fill
+                priority
+                sizes="(max-width: 1023px) 100vw, 56vw"
+                className="object-cover"
+                style={{ objectPosition: asset.objectPosition ?? "center center" }}
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,rgba(252,203,62,0.85),rgba(4,139,114,0.75),transparent)]" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(7,12,17,0.62)] via-[rgba(7,12,17,0.18)] to-transparent p-6 text-white lg:hidden md:p-7">
+              <p className="text-[0.58rem] tracking-[0.24em] uppercase text-white/72">{priority}</p>
+              <h2 className="mt-3 max-w-[11ch] font-display text-[2rem] leading-[0.98] md:text-[2.6rem]">
+                {excursion.shortTitle}
+              </h2>
+            </div>
+            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5" />
+          </>
+        ) : (
+          <EditorialVisual
+            visual={excursion.visual}
+            title={excursion.shortTitle}
+            meta={priority}
+            className="absolute inset-0"
+          />
+        )}
+      </div>
       <div className="bg-white p-6 md:p-8">
         <p className="text-[0.62rem] tracking-[0.24em] uppercase text-[var(--brand-primary)]">{priority}</p>
         <h2 className="mt-4 font-display text-[2rem] leading-[1.02] text-[var(--text-primary)] md:text-[2.6rem]">
@@ -100,7 +222,7 @@ function ExcursionEditorialCard({
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
             href={`/excursiones/${excursion.slug}`}
-            className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white"
+            className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2"
           >
             Ver detalle
           </Link>
@@ -110,6 +232,131 @@ function ExcursionEditorialCard({
             ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
           >
             Consultar esta salida
+          </WhatsAppButton>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ExcursionRailCard({ excursion, index }: { excursion: Excursion; index: number }) {
+  const asset = getExcursionAsset(excursion);
+
+  return (
+    <article className="flex h-full flex-col bg-white">
+      <div className="relative min-h-[240px] overflow-hidden border-b border-[var(--border-default)] md:min-h-[280px] lg:min-h-[320px]">
+        {asset ? (
+          <>
+            <div className="absolute inset-0 bg-[var(--neutral-200)]">
+              <Image
+                src={asset.image}
+                alt={getExcursionAlt(excursion)}
+                fill
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                className="object-cover"
+                style={{ objectPosition: asset.objectPosition ?? "center center" }}
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,rgba(252,203,62,0.85),rgba(4,139,114,0.75),transparent)]" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(7,12,17,0.6)] via-[rgba(7,12,17,0.16)] to-transparent p-5 text-white md:hidden">
+              <p className="text-[0.58rem] tracking-[0.22em] uppercase text-white/72">
+                {String(index + 2).padStart(2, "0")}
+              </p>
+              <h3 className="mt-3 max-w-[12ch] font-display text-[1.85rem] leading-[1.02]">
+                {excursion.shortTitle}
+              </h3>
+            </div>
+          </>
+        ) : (
+          <EditorialVisual
+            visual={excursion.visual}
+            title={excursion.shortTitle}
+            meta={String(index + 2).padStart(2, "0")}
+            className="absolute inset-0"
+          />
+        )}
+      </div>
+      <div className="flex flex-1 flex-col p-5 md:p-6">
+        <p className="text-[0.62rem] tracking-[0.22em] uppercase text-[var(--text-muted)]">
+          {String(index + 2).padStart(2, "0")}
+        </p>
+        <h3 className="mt-4 font-display text-[1.8rem] leading-[1.04] text-[var(--text-primary)]">
+          {excursion.shortTitle}
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">{excursion.teaser}</p>
+        <div className="mt-5 flex flex-wrap gap-2 text-[0.62rem] tracking-[0.18em] uppercase text-[var(--text-muted)]">
+          <span className="border border-[var(--border-default)] px-3 py-1">
+            {excursionCategoryLabels[excursion.category]}
+          </span>
+          <span className="border border-[var(--border-default)] px-3 py-1">{excursion.duration}</span>
+        </div>
+        <div className="mt-6 flex flex-col gap-3">
+          <Link
+            href={`/excursiones/${excursion.slug}`}
+            className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2"
+          >
+            Ver recorrido
+          </Link>
+          <WhatsAppButton
+            message={excursion.whatsappMessage}
+            className="justify-center rounded-none px-5 py-3 text-[0.68rem] tracking-[0.12em] uppercase"
+            ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
+          >
+            Consultar por WhatsApp
+          </WhatsAppButton>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ExcursionSplitCard({ excursion, mirrored }: { excursion: Excursion; mirrored: boolean }) {
+  return (
+    <article className="grid gap-px overflow-hidden border border-[var(--border-default)] bg-[var(--border-default)] lg:grid-cols-[0.96fr_1.04fr] lg:items-stretch">
+      <div className={`relative min-h-[320px] bg-[var(--neutral-950)] ${mirrored ? "lg:order-2" : ""}`}>
+        <ExcursionMediaPanel
+          excursion={excursion}
+          title={excursion.editorialTitle}
+          meta={excursion.location}
+          sizes="(max-width: 1023px) 100vw, 50vw"
+          className="h-full min-h-[320px] lg:min-h-full"
+          imageClassName="lg:scale-[1.01]"
+        />
+      </div>
+      <div className={`bg-white p-6 md:p-8 ${mirrored ? "lg:order-1" : ""}`}>
+        <div className="flex flex-wrap items-center gap-2 text-[0.62rem] tracking-[0.2em] uppercase text-[var(--text-muted)]">
+          <span>{excursionCategoryLabels[excursion.category]}</span>
+          <span>•</span>
+          <span>{excursionRhythmLabels[excursion.rhythm]}</span>
+          <span>•</span>
+          <span>{excursion.duration}</span>
+        </div>
+        <h3 className="mt-5 font-display text-[2rem] leading-[1.02] text-[var(--text-primary)] md:text-[2.5rem]">
+          {excursion.shortTitle}
+        </h3>
+        <p className="mt-4 max-w-[56ch] text-sm leading-7 text-[var(--text-secondary)] md:text-[0.95rem]">
+          {excursion.summary}
+        </p>
+        <ul className="mt-6 grid gap-3 text-sm leading-6 text-[var(--text-secondary)] md:grid-cols-2">
+          {excursion.highlights.slice(0, 4).map((item) => (
+            <li key={item} className="border-t border-[var(--border-default)] pt-3">
+              {item}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Link
+            href={`/excursiones/${excursion.slug}`}
+            className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)] focus-visible:ring-offset-2"
+          >
+            Abrir ficha completa
+          </Link>
+          <WhatsAppButton
+            message={excursion.whatsappMessage}
+            className="justify-center rounded-none px-5 py-3 text-[0.68rem] tracking-[0.12em] uppercase"
+            ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
+          >
+            Ir a WhatsApp
           </WhatsAppButton>
         </div>
       </div>
@@ -130,8 +377,8 @@ export function ExcursionsIndexPage({
   const editorial = filtered.slice(4);
 
   return (
-    <main className="bg-[var(--neutral-50)] pt-24 md:pt-28">
-      <section className="relative overflow-hidden border-b border-[var(--border-default)] bg-[var(--neutral-950)] px-5 py-20 text-[var(--text-on-dark)] md:px-10 md:py-28">
+    <main className="bg-[var(--neutral-50)]">
+      <section className="relative isolate flex min-h-[100dvh] items-start overflow-hidden border-b border-[var(--border-default)] bg-[var(--neutral-950)] px-5 pb-12 pt-24 text-[var(--text-on-dark)] md:min-h-screen md:px-10 md:pb-16 md:pt-28">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
@@ -141,39 +388,45 @@ export function ExcursionsIndexPage({
             backgroundSize: "auto, auto, 100% 92px",
           }}
         />
-        <div className="relative mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-[linear-gradient(180deg,rgba(7,12,17,0)_0%,rgba(7,12,17,0.34)_42%,rgba(7,12,17,0.74)_100%)]"
+        />
+        <div className="relative mx-auto grid w-full max-w-[1200px] gap-10 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.78fr)] lg:items-start lg:gap-14">
+          <div className="max-w-[720px] self-start">
             <SectionEyebrow>Mapa Curado</SectionEyebrow>
-            <h1 className="mt-5 max-w-[12ch] font-display text-[clamp(3rem,7vw,6rem)] leading-[0.96] tracking-[-0.03em] text-white">
-              Excursiones en Carlos Paz con criterio local.
-            </h1>
+            <h2 className="mt-5 max-w-[12ch] font-display text-[clamp(3rem,7vw,6rem)] leading-[0.96] tracking-[-0.03em] text-white">
+              Excursiones en Córdoba con criterio local.
+            </h2>
           </div>
 
-          <div className="space-y-6">
-            <p className="max-w-[54ch] text-[0.98rem] leading-8 text-[rgba(245,240,232,0.76)]">
-              No armamos una grilla plana de salidas. Armamos una coleccion de experiencias,
-              atractivos y traslados para leer Carlos Paz, la sierra y sus alrededores con un tono
-              mas editorial, directo y facil de convertir en WhatsApp.
-            </p>
-            <div className="flex flex-wrap gap-3 text-[0.66rem] tracking-[0.2em] uppercase text-[rgba(245,240,232,0.52)]">
-              <span>{filtered.length} experiencias activas</span>
-              <span>•</span>
-              <span>Fuente unica normalizada desde el brief comercial</span>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <WhatsAppButton
-                message={whatsappMessages.cta}
-                className="justify-center rounded-none px-6 py-3 text-[0.72rem] tracking-[0.12em] uppercase"
-                ariaLabel="Armar itinerario por WhatsApp"
-              >
-                Armar itinerario por WhatsApp
-              </WhatsAppButton>
-              <a
-                href="#listado"
-                className="inline-flex min-h-11 items-center justify-center border border-white/18 px-6 py-3 text-[0.7rem] font-semibold tracking-[0.16em] uppercase text-white/84 transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
-              >
-                Explorar el mapa completo
-              </a>
+          <div className="grid gap-4 lg:justify-items-end">
+            <div className="w-full max-w-[420px] space-y-6 border border-white/12 bg-[linear-gradient(180deg,rgba(7,12,17,0.84)_0%,rgba(7,12,17,0.72)_100%)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.26)] backdrop-blur-[14px] md:p-7">
+              <p className="max-w-[34ch] text-[0.98rem] leading-8 text-[rgba(245,240,232,0.76)]">
+                No armamos una grilla plana de salidas. Armamos una coleccion de experiencias,
+                atractivos y traslados para explorar Carlos Paz, la sierra y sus alrededores con un tono
+                mas editorial, directo y facil de convertir en WhatsApp.
+              </p>
+              <div className="flex flex-wrap gap-3 text-[0.66rem] tracking-[0.2em] uppercase text-[rgba(245,240,232,0.52)]">
+                <span>{filtered.length} experiencias activas</span>
+                <span aria-hidden="true">•</span>
+                <span>Curaduria local</span>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <WhatsAppButton
+                  message={whatsappMessages.cta}
+                  className="justify-center rounded-none px-6 py-3 text-[0.72rem] tracking-[0.12em] uppercase"
+                  ariaLabel="Armar itinerario por WhatsApp"
+                >
+                  Armar itinerario por WhatsApp
+                </WhatsAppButton>
+                <a
+                  href="#listado"
+                  className="inline-flex min-h-11 items-center justify-center border border-white/18 px-6 py-3 text-[0.7rem] font-semibold tracking-[0.16em] uppercase text-white/84 transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
+                >
+                  Explorar el mapa completo
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -202,11 +455,11 @@ export function ExcursionsIndexPage({
         </div>
       </section>
 
-      <section id="listado" className="px-5 py-16 md:px-10 md:py-20">
+      <section id="listado" className="scroll-mt-24 px-5 py-16 md:scroll-mt-28 md:px-10 md:py-20">
         <div className="mx-auto max-w-[1200px] space-y-8">
           <div className="grid gap-6 border-b border-[var(--border-default)] pb-8 lg:grid-cols-[0.55fr_1.45fr] lg:items-start">
             <div>
-              <SectionEyebrow>Filtros Visuales</SectionEyebrow>
+              <SectionEyebrow>Filtros de búsqueda</SectionEyebrow>
               <h2 className="mt-4 font-display text-[2rem] leading-[1.02] text-[var(--text-primary)] md:text-[2.8rem]">
                 Elegi por tipo de salida o por ritmo.
               </h2>
@@ -242,25 +495,7 @@ export function ExcursionsIndexPage({
               {rail.length ? (
                 <div className="grid gap-px overflow-hidden border border-[var(--border-default)] bg-[var(--border-default)] md:grid-cols-3">
                   {rail.map((excursion, index) => (
-                    <article key={excursion.slug} className="bg-white p-5 md:p-6">
-                      <p className="text-[0.62rem] tracking-[0.22em] uppercase text-[var(--text-muted)]">
-                        {String(index + 2).padStart(2, "0")}
-                      </p>
-                      <h3 className="mt-4 font-display text-[1.8rem] leading-[1.04] text-[var(--text-primary)]">
-                        {excursion.shortTitle}
-                      </h3>
-                      <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">{excursion.teaser}</p>
-                      <div className="mt-5 border-t border-[var(--border-default)] pt-4 text-[0.66rem] tracking-[0.18em] uppercase text-[var(--text-muted)]">
-                        {excursionCategoryLabels[excursion.category]} · {excursion.duration}
-                      </div>
-                      <Link
-                        href={`/excursiones/${excursion.slug}`}
-                        className="mt-5 inline-flex items-center gap-2 text-[0.68rem] font-semibold tracking-[0.18em] uppercase text-[var(--brand-primary)] transition-[gap] hover:gap-3"
-                      >
-                        Ver recorrido
-                        <span aria-hidden="true">-&gt;</span>
-                      </Link>
-                    </article>
+                    <ExcursionRailCard key={excursion.slug} excursion={excursion} index={index} />
                   ))}
                 </div>
               ) : null}
@@ -269,56 +504,11 @@ export function ExcursionsIndexPage({
                 const mirrored = index % 2 === 1;
 
                 return (
-                  <article
+                  <ExcursionSplitCard
                     key={excursion.slug}
-                    className="grid gap-px overflow-hidden border border-[var(--border-default)] bg-[var(--border-default)] lg:grid-cols-2"
-                  >
-                    <div className={mirrored ? "lg:order-2" : ""}>
-                      <EditorialVisual
-                        visual={excursion.visual}
-                        title={excursion.editorialTitle}
-                        meta={excursion.location}
-                        className="min-h-[280px]"
-                      />
-                    </div>
-                    <div className={`bg-white p-6 md:p-8 ${mirrored ? "lg:order-1" : ""}`}>
-                      <div className="flex flex-wrap items-center gap-2 text-[0.62rem] tracking-[0.2em] uppercase text-[var(--text-muted)]">
-                        <span>{excursionCategoryLabels[excursion.category]}</span>
-                        <span>•</span>
-                        <span>{excursionRhythmLabels[excursion.rhythm]}</span>
-                        <span>•</span>
-                        <span>{excursion.duration}</span>
-                      </div>
-                      <h3 className="mt-5 font-display text-[2rem] leading-[1.02] text-[var(--text-primary)] md:text-[2.5rem]">
-                        {excursion.shortTitle}
-                      </h3>
-                      <p className="mt-4 max-w-[56ch] text-sm leading-7 text-[var(--text-secondary)] md:text-[0.95rem]">
-                        {excursion.summary}
-                      </p>
-                      <ul className="mt-6 grid gap-3 text-sm leading-6 text-[var(--text-secondary)] md:grid-cols-2">
-                        {excursion.highlights.slice(0, 4).map((item) => (
-                          <li key={item} className="border-t border-[var(--border-default)] pt-3">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                        <Link
-                          href={`/excursiones/${excursion.slug}`}
-                          className="inline-flex min-h-11 items-center justify-center border border-[var(--text-primary)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-[var(--text-primary)] transition-colors hover:bg-[var(--text-primary)] hover:text-white"
-                        >
-                          Abrir ficha completa
-                        </Link>
-                        <WhatsAppButton
-                          message={excursion.whatsappMessage}
-                          className="justify-center rounded-none px-5 py-3 text-[0.68rem] tracking-[0.12em] uppercase"
-                          ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
-                        >
-                          Ir a WhatsApp
-                        </WhatsAppButton>
-                      </div>
-                    </div>
-                  </article>
+                    excursion={excursion}
+                    mirrored={mirrored}
+                  />
                 );
               })}
             </div>

@@ -1,3 +1,5 @@
+import { getExcursionHeroImageSrc } from "@/lib/excursion-assets";
+
 export type ExcursionCategory = "atraccion" | "excursion" | "traslado";
 
 export type ExcursionRhythm =
@@ -80,7 +82,7 @@ export const excursionRhythmLabels: Record<ExcursionRhythm, string> = {
 
 function buildExcursionImageSet(slug: string) {
   return {
-    heroImage: `/images/excursions/${slug}/hero.jpg`,
+    heroImage: getExcursionHeroImageSrc(slug) ?? `/images/excursions/${slug}/hero.jpg`,
     gallery: [
       `/images/excursions/${slug}/gallery-01.jpg`,
       `/images/excursions/${slug}/gallery-02.jpg`,

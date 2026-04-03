@@ -182,9 +182,10 @@ export function Navbar() {
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const iconDuration = reducedMotion ? 0 : 0.24;
+    const closeIconOffset = 7.25;
 
     gsap.to(lineTop, {
-      y: isMenuOpen ? 6 : 0,
+      y: isMenuOpen ? closeIconOffset : 0,
       rotation: isMenuOpen ? 45 : 0,
       duration: iconDuration,
       ease: "power2.out",
@@ -199,7 +200,7 @@ export function Navbar() {
     });
 
     gsap.to(lineBottom, {
-      y: isMenuOpen ? -6 : 0,
+      y: isMenuOpen ? -closeIconOffset : 0,
       rotation: isMenuOpen ? -45 : 0,
       duration: iconDuration,
       ease: "power2.out",
