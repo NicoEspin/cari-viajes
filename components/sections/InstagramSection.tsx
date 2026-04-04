@@ -22,7 +22,6 @@ const INSTAGRAM_POSTS = [
   "https://www.instagram.com/p/DS-86HlkYHv/",
   "https://www.instagram.com/p/DSTBygKkXCk/",
   "https://www.instagram.com/p/DR3Bg4yjc_Z/",
-  "https://www.instagram.com/p/DQYE7v5DXvc/",
   "https://www.instagram.com/p/DRcMt0ADTto/?img_index=1",
 ] as const;
 
