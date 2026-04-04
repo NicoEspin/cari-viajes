@@ -37,6 +37,8 @@ export function LandingMotion() {
             desktop: boolean;
           };
 
+          const galleryTweens: Array<{ kill: () => void }> = [];
+
           const reveal = (
             target: string,
             options?: { y?: number; duration?: number; stagger?: number; start?: string },
@@ -53,6 +55,36 @@ export function LandingMotion() {
                 once: true,
               },
               clearProps: "opacity,visibility,transform",
+            });
+          };
+
+          const setupGalleryMarquees = () => {
+            galleryTweens.forEach((tween) => tween.kill());
+            galleryTweens.length = 0;
+
+            const tracks = Array.from(
+              document.querySelectorAll<HTMLElement>("[data-gallery-marquee]"),
+            );
+
+            tracks.forEach((track) => {
+              const halfWidth = track.scrollWidth / 2;
+              const duration = Number(track.dataset.duration ?? 24);
+              const direction = track.dataset.direction === "right" ? "right" : "left";
+
+              if (!halfWidth) {
+                return;
+              }
+
+              gsap.set(track, { x: direction === "right" ? -halfWidth : 0 });
+
+              galleryTweens.push(
+                gsap.to(track, {
+                  x: direction === "right" ? 0 : -halfWidth,
+                  duration,
+                  ease: "none",
+                  repeat: -1,
+                }),
+              );
             });
           };
 
@@ -132,39 +164,39 @@ export function LandingMotion() {
           });
           reveal(".experience-card", { y: 32, stagger: 0.1, start: "top 80%" });
 
-          reveal("#diferenciales [data-reveal]", {
-            y: 28,
-            stagger: 0.12,
+          reveal("#galeria [data-reveal]", {
+            y: 24,
+            stagger: 0.08,
             start: "top 84%",
           });
 
-          gsap.from(".differential-number", {
-            autoAlpha: 0,
-            y: 56,
-            duration: 0.82,
-            stagger: 0.12,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: "#diferenciales",
-              start: "top 76%",
-              once: true,
-            },
-            clearProps: "opacity,visibility,transform",
-          });
+          const queueGallerySetup = () => {
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                setupGalleryMarquees();
+              });
+            });
+          };
 
-          gsap.from(".differential-icon", {
-            autoAlpha: 0,
-            scale: 0.9,
-            duration: 0.48,
-            stagger: 0.08,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: "#diferenciales",
-              start: "top 79%",
-              once: true,
-            },
-            clearProps: "opacity,visibility,transform",
-          });
+          queueGallerySetup();
+
+          const handleResize = () => {
+            queueGallerySetup();
+          };
+
+          window.addEventListener("resize", handleResize);
+
+          let resizeObserver: ResizeObserver | undefined;
+
+          if (typeof ResizeObserver !== "undefined") {
+            resizeObserver = new ResizeObserver(() => {
+              queueGallerySetup();
+            });
+
+            document
+              .querySelectorAll<HTMLElement>("[data-gallery-marquee]")
+              .forEach((track) => resizeObserver?.observe(track));
+          }
 
           reveal("#testimonios [data-reveal]", {
             y: 24,
@@ -229,6 +261,12 @@ export function LandingMotion() {
               },
             });
           }
+
+          return () => {
+            window.removeEventListener("resize", handleResize);
+            resizeObserver?.disconnect();
+            galleryTweens.forEach((tween) => tween.kill());
+          };
         },
       );
 

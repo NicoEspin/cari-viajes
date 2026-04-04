@@ -6,7 +6,7 @@ export type NavigationLink = {
 export const navbarLinks: NavigationLink[] = [
   { label: "Inicio", href: "/#hero" },
   { label: "Excursiones", href: "/excursiones" },
-  { label: "Diferenciales", href: "/#diferenciales" },
+  { label: "Galeria", href: "/#galeria" },
 ];
 
 export const footerLinks: NavigationLink[] = [

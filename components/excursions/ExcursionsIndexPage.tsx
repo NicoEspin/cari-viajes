@@ -11,7 +11,11 @@ import {
 } from "@/content/excursions";
 import { whatsappMessages } from "@/lib/whatsapp";
 import { getExcursionAssetBySlug } from "@/lib/excursion-assets";
-import { excursionDetailCtaClassName } from "@/components/excursions/detailCtaStyles";
+import {
+  editorialSquareDarkGhostCtaClassName,
+  editorialSquareWhatsAppButtonClassName,
+  excursionDetailCtaClassName,
+} from "@/components/ui/buttonStyles";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { EditorialVisual } from "@/components/ui/EditorialVisual";
@@ -230,7 +234,7 @@ function ExcursionEditorialCard({
           </Link>
           <WhatsAppButton
             message={excursion.whatsappMessage}
-            className="justify-center rounded-none px-5 py-3 text-[0.68rem] tracking-[0.12em] uppercase"
+            className={editorialSquareWhatsAppButtonClassName}
             ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
           >
             Consultar esta salida
@@ -301,7 +305,7 @@ function ExcursionRailCard({ excursion, index }: { excursion: Excursion; index: 
           </Link>
           <WhatsAppButton
             message={excursion.whatsappMessage}
-            className="justify-center rounded-none px-5 py-3 text-[0.68rem] tracking-[0.12em] uppercase"
+            className={editorialSquareWhatsAppButtonClassName}
             ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
           >
             Consultar por WhatsApp
@@ -355,7 +359,7 @@ function ExcursionSplitCard({ excursion, mirrored }: { excursion: Excursion; mir
           </Link>
           <WhatsAppButton
             message={excursion.whatsappMessage}
-            className="justify-center rounded-none px-5 py-3 text-[0.68rem] tracking-[0.12em] uppercase"
+            className={editorialSquareWhatsAppButtonClassName}
             ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
           >
             Ir a WhatsApp
@@ -425,14 +429,14 @@ export function ExcursionsIndexPage({
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <WhatsAppButton
                   message={whatsappMessages.cta}
-                  className="justify-center rounded-none px-6 py-3 text-[0.72rem] tracking-[0.12em] uppercase"
+                  className={`${editorialSquareWhatsAppButtonClassName} px-6 text-[0.72rem]`}
                   ariaLabel="Armar itinerario por WhatsApp"
                 >
                   Armar itinerario por WhatsApp
                 </WhatsAppButton>
                 <a
                   href="#listado"
-                  className="inline-flex min-h-11 items-center justify-center border border-white/18 px-6 py-3 text-[0.7rem] font-semibold tracking-[0.16em] uppercase text-white/84 transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
+                  className={editorialSquareDarkGhostCtaClassName}
                 >
                   Explorar el mapa completo
                 </a>
@@ -537,7 +541,7 @@ export function ExcursionsIndexPage({
                 </Link>
                 <WhatsAppButton
                   message={whatsappMessages.cta}
-                  className="justify-center rounded-none px-5 py-3 text-[0.68rem] tracking-[0.12em] uppercase"
+                  className={editorialSquareWhatsAppButtonClassName}
                   ariaLabel="Consultar por WhatsApp"
                 >
                   Pedir recomendacion
@@ -588,14 +592,14 @@ export function ExcursionsIndexPage({
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <WhatsAppButton
               message={whatsappMessages.cta}
-              className="justify-center rounded-none px-6 py-3 text-[0.72rem] tracking-[0.12em] uppercase"
+              className={`${editorialSquareWhatsAppButtonClassName} px-6 text-[0.72rem]`}
               ariaLabel="Escribir por WhatsApp para armar plan"
             >
               Armar plan por WhatsApp
             </WhatsAppButton>
             <Link
               href="/"
-              className="inline-flex min-h-11 items-center justify-center border border-white/18 px-6 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-white/84 transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
+              className={editorialSquareDarkGhostCtaClassName}
             >
               Volver a la home
             </Link>

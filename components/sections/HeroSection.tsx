@@ -1,4 +1,8 @@
 import Image from "next/image";
+import {
+  editorialSquareDarkGhostCtaClassName,
+  editorialSquareWhatsAppButtonClassName,
+} from "@/components/ui/buttonStyles";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import heroImage from "@/public/hero.webp";
 import { whatsappMessages } from "@/lib/whatsapp";
@@ -57,8 +61,8 @@ export function HeroSection() {
           </div>
 
           <h1 className="hero-heading max-w-[12ch] font-display text-[clamp(2.7rem,8vw,5.4rem)] font-normal leading-[0.98] tracking-[-0.03em] text-[var(--sand)]">
-            Carlos Paz se vive
-            <span className="block text-[var(--gold)]">mejor cuando te guian bien.</span>
+            Carlos Paz se vive mejor
+            <span className="block text-[var(--gold)]"> cuando te guian bien.</span>
           </h1>
 
           <p className="hero-support-copy mt-6 max-w-[56ch] text-[0.98rem] leading-7 text-[rgba(245,240,232,0.76)] md:mt-7 md:text-[1.03rem] md:leading-8">
@@ -68,16 +72,16 @@ export function HeroSection() {
           <div className="hero-actions mt-8 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center md:mt-9">
             <WhatsAppButton
               message={whatsappMessages.hero}
-              className="justify-center px-7 py-3 text-[0.82rem] tracking-[0.02em]"
+              className={`${editorialSquareWhatsAppButtonClassName} px-7 text-[0.82rem] tracking-[0.08em]`}
             >
               Escribinos por WhatsApp
             </WhatsAppButton>
             <a
               href="#excursiones"
-              className="group inline-flex min-h-11 items-center justify-center gap-3 rounded-full border border-[rgba(245,240,232,0.22)] bg-[rgba(245,240,232,0.08)] px-6 text-[0.72rem] font-semibold tracking-[0.1em] uppercase text-[var(--sand)] transition-all duration-200 hover:border-[rgba(236,249,62,0.56)] hover:bg-[rgba(245,240,232,0.14)]"
+              className={`group ${editorialSquareDarkGhostCtaClassName}`}
             >
               Ver excursiones
-              <span className="grid size-7 place-items-center rounded-full border border-[rgba(245,240,232,0.16)] transition-all duration-200 group-hover:translate-y-0.5 group-hover:border-[rgba(236,249,62,0.5)]">
+              <span className="grid size-7 place-items-center rounded-none border border-[rgba(245,240,232,0.16)] transition-all duration-200 group-hover:translate-y-0.5 group-hover:border-[rgba(236,249,62,0.5)]">
                 <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                   <path d="M6 2v8M2 6l4 4 4-4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

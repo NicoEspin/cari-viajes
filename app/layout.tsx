@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   title: "Excursiones en Carlos Paz | Cari Turismo · Guia Local",
   description:
     "Excursiones, city tours y traslados en Villa Carlos Paz con atencion personalizada y beneficios exclusivos. Escribinos por WhatsApp.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   alternates: {
     canonical: "/",
   },

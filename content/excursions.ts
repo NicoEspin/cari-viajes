@@ -1,4 +1,3 @@
-import { getExcursionHeroImageSrc } from "@/lib/excursion-assets";
 import { getExcursionWhatsAppMessage } from "@/lib/whatsapp";
 
 export type ExcursionCategory = "atraccion" | "excursion" | "traslado";
@@ -35,8 +34,6 @@ export type ExcursionInfo = {
 
 export type Excursion = {
   slug: string;
-  heroImage: string;
-  gallery: string[];
   title: string;
   shortTitle: string;
   editorialTitle: string;
@@ -83,21 +80,9 @@ export const excursionRhythmLabels: Record<ExcursionRhythm, string> = {
   "a-medida": "A medida",
 };
 
-function buildExcursionImageSet(slug: string) {
-  return {
-    heroImage: getExcursionHeroImageSrc(slug) ?? `/images/excursions/${slug}/hero.jpg`,
-    gallery: [
-      `/images/excursions/${slug}/gallery-01.jpg`,
-      `/images/excursions/${slug}/gallery-02.jpg`,
-      `/images/excursions/${slug}/gallery-03.jpg`,
-    ],
-  };
-}
-
 const excursionRecords: ExcursionRecord[] = [
   {
     slug: "city-tour-lacustre",
-    ...buildExcursionImageSet("city-tour-lacustre"),
     title: "City Tour Lacustre",
     shortTitle: "City Tour Lacustre",
     editorialTitle: "El lago entra primero en escena.",
@@ -173,7 +158,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "bar-de-hielo",
-    ...buildExcursionImageSet("bar-de-hielo"),
     title: "Bar de Hielo + Mundo Irreal",
     shortTitle: "Bar de Hielo",
     editorialTitle: "Cero grados. Cien fotos que si valen.",
@@ -248,7 +232,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "aerosilla",
-    ...buildExcursionImageSet("aerosilla"),
     title: "Aerosilla",
     shortTitle: "Aerosilla",
     editorialTitle: "La ciudad sube un piso y cambia de escala.",
@@ -324,7 +307,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "city-bus-turistico-grupos",
-    ...buildExcursionImageSet("city-bus-turistico-grupos"),
     title: "City Bus Turistico para Grupos",
     shortTitle: "City Bus para Grupos",
     editorialTitle: "La ciudad en clave de grupo, sin perder ritmo.",
@@ -398,7 +380,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "valle-de-punilla",
-    ...buildExcursionImageSet("valle-de-punilla"),
     title: "Excursion Valle de Punilla",
     shortTitle: "Valle de Punilla",
     editorialTitle: "La sierra entra en modo ruta y no afloja.",
@@ -472,7 +453,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "dique-los-molinos-villa-general-belgrano",
-    ...buildExcursionImageSet("dique-los-molinos-villa-general-belgrano"),
     title: "Excursion Dique Los Molinos con V. Gral Belgrano",
     shortTitle: "Dique Los Molinos + Villa General Belgrano",
     editorialTitle: "Agua, productos regionales y una avenida para quedarse un rato mas.",
@@ -550,7 +530,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "la-cumbrecita-villa-general-belgrano",
-    ...buildExcursionImageSet("la-cumbrecita-villa-general-belgrano"),
     title: "Excursion La Cumbrecita con V. Gral Belgrano",
     shortTitle: "La Cumbrecita + Villa General Belgrano",
     editorialTitle: "Bosque peatonal, cascada y una escala alpina bien medida.",
@@ -634,7 +613,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "altas-cumbres-tuneles",
-    ...buildExcursionImageSet("altas-cumbres-tuneles"),
     title: "Excursion Altas Cumbres con Los Tuneles",
     shortTitle: "Altas Cumbres con Los Tuneles",
     editorialTitle: "La ruta se afina y de golpe aparece la puerta del cielo.",
@@ -710,7 +688,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "cascada-escondida",
-    ...buildExcursionImageSet("cascada-escondida"),
     title: "Excursion Cascada Escondida",
     shortTitle: "Cascada Escondida",
     editorialTitle: "Granito, agua fria y una aventura que arranca sin gritar.",
@@ -786,7 +763,6 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "traslados-especiales",
-    ...buildExcursionImageSet("traslados-especiales"),
     title: "Traslados Especiales",
     shortTitle: "Traslados Especiales",
     editorialTitle: "La logistica tambien puede sentirse premium.",

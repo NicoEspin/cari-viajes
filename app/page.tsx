@@ -1,9 +1,9 @@
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { LandingMotion } from "@/components/motion/LandingMotion";
-import { DifferentialsSection } from "@/components/sections/DifferentialsSection";
 import { ExperiencesSection } from "@/components/sections/ExperiencesSection";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { GallerySection } from "@/components/sections/GallerySection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { InstagramSection } from "@/components/sections/InstagramSection";
 import { SocialProofSection } from "@/components/sections/SocialProofSection";
@@ -59,7 +59,7 @@ export default function Home() {
         <HeroSection />
         <ValuePropSection />
         <ExperiencesSection />
-        <DifferentialsSection />
+        <GallerySection />
         <SocialProofSection />
         <WhatsAppCtaSection />
         <InstagramSection />

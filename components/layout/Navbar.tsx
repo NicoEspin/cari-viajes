@@ -4,6 +4,7 @@ import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
+import { editorialSquareWhatsAppButtonClassName } from "@/components/ui/buttonStyles";
 import { navbarLinks } from "@/content/navigation";
 import { whatsappMessages } from "@/lib/whatsapp";
 import { WhatsAppButton } from "../ui/WhatsAppButton";
@@ -293,15 +294,15 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-            <div  className="hidden px-5 py-2.5 text-[0.72rem] md:inline-flex">
-          {/* FIX 5: WhatsApp button solo en desktop — en mobile vive dentro del menú */}
-          <WhatsAppButton
-            message={whatsappMessages.nav}
-            
-            ariaLabel="Escribir por WhatsApp"
-          >
-            <span className="tracking-[0.1em] uppercase">Escribinos</span>
-          </WhatsAppButton>
+          <div className="hidden md:block">
+            {/* FIX 5: WhatsApp button solo en desktop — en mobile vive dentro del menú */}
+            <WhatsAppButton
+              message={whatsappMessages.nav}
+              className={`${editorialSquareWhatsAppButtonClassName} px-6`}
+              ariaLabel="Escribir por WhatsApp"
+            >
+              <span>Escribinos</span>
+            </WhatsAppButton>
           </div>
 
           <button

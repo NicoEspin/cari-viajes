@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   excursionCategoryLabels,
@@ -5,10 +6,15 @@ import {
   getRelatedExcursions,
   type Excursion,
 } from "@/content/excursions";
-import { excursionDetailCtaClassName } from "@/components/excursions/detailCtaStyles";
-import { EditorialVisual } from "@/components/ui/EditorialVisual";
+import { ExcursionEditorialGallery } from "@/components/excursions/ExcursionEditorialGallery";
+import {
+  editorialSquareDarkGhostCtaClassName,
+  editorialSquareWhatsAppButtonClassName,
+  excursionDetailCtaClassName,
+} from "@/components/ui/buttonStyles";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { getExcursionMediaBySlug } from "@/lib/excursion-media";
 
 function InfoColumn({ title, items }: { title: string; items: string[] }) {
   if (!items.length) {
@@ -33,21 +39,41 @@ function InfoColumn({ title, items }: { title: string; items: string[] }) {
 
 export function ExcursionDetailPage({ excursion }: { excursion: Excursion }) {
   const related = getRelatedExcursions(excursion.relatedSlugs).slice(0, 3);
-  const galleryItems = excursion.gallery.slice(0, 3);
+  const media =
+    getExcursionMediaBySlug(excursion.slug) ?? getExcursionMediaBySlug("traslados-especiales")!;
+  const heroAsset = media.hero;
 
   return (
-    <main className="bg-[var(--neutral-50)] pt-24 md:pt-28">
-      <section className="relative overflow-hidden border-b border-[var(--border-default)] bg-[var(--neutral-950)] px-5 py-14 text-white md:px-10 md:py-18">
+    <main className="bg-[var(--neutral-50)]">
+      <section className="relative flex min-h-[100dvh] items-end overflow-hidden border-b border-[var(--border-default)] bg-[var(--neutral-950)] px-5 py-14 text-white md:min-h-screen md:px-10 md:py-18">
+        <Image
+          src={heroAsset.image}
+          alt={heroAsset.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: heroAsset.objectPosition ?? "center center" }}
+        />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 14% 22%, rgba(4,139,114,0.24) 0%, transparent 26%), radial-gradient(circle at 82% 18%, rgba(252,203,62,0.18) 0%, transparent 24%), linear-gradient(180deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "auto, auto, 100% 96px",
+              "linear-gradient(180deg, rgba(5,8,7,0.18) 0%, rgba(5,8,7,0.42) 30%, rgba(5,8,7,0.72) 72%, rgba(5,8,7,0.9) 100%), radial-gradient(circle at 14% 22%, rgba(4,139,114,0.28) 0%, transparent 28%), radial-gradient(circle at 82% 18%, rgba(252,203,62,0.16) 0%, transparent 24%)",
           }}
         />
-        <div className="relative mx-auto max-w-[1200px]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "100% 96px",
+            maskImage: "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 28%, rgba(0,0,0,0.9) 100%)",
+          }}
+        />
+        <div className="relative mx-auto w-full max-w-[1200px]">
           <div className="flex flex-wrap items-center gap-3 text-[0.66rem] tracking-[0.2em] uppercase text-white/55">
             <Link href="/" className="transition-colors hover:text-[var(--gold)]">
               Inicio
@@ -60,53 +86,41 @@ export function ExcursionDetailPage({ excursion }: { excursion: Excursion }) {
             <span className="text-white/82">{excursion.shortTitle}</span>
           </div>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-end">
-            <div>
-              <SectionEyebrow>{excursion.heroKicker}</SectionEyebrow>
-              <h1 className="mt-5 max-w-[11ch] font-display text-[clamp(3rem,7vw,6rem)] leading-[0.94] tracking-[-0.03em] text-white">
-                {excursion.shortTitle}
-              </h1>
-              <p className="mt-6 max-w-[56ch] text-[1rem] leading-8 text-white/74">{excursion.summary}</p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                <span className="border border-white/14 px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-white/64">
-                  {excursionCategoryLabels[excursion.category]}
+          <div className="mt-8 max-w-[720px] rounded-[28px] border border-white/12 bg-[rgba(5,8,7,0.3)] p-6 backdrop-blur-[6px] md:p-8 lg:p-10">
+            <SectionEyebrow>{excursion.heroKicker}</SectionEyebrow>
+            <h1 className="mt-5 max-w-[11ch] font-display text-[clamp(3rem,7vw,6rem)] leading-[0.94] tracking-[-0.03em] text-white">
+              {excursion.shortTitle}
+            </h1>
+            <p className="mt-6 max-w-[56ch] text-[1rem] leading-8 text-white/80">{excursion.summary}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="border border-white/14 bg-white/6 px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-white/70">
+                {excursionCategoryLabels[excursion.category]}
+              </span>
+              <span className="border border-white/14 bg-white/6 px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-white/70">
+                {excursionRhythmLabels[excursion.rhythm]}
+              </span>
+              <span className="border border-white/14 bg-white/6 px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-white/70">
+                {excursion.duration}
+              </span>
+              {excursion.badge ? (
+                <span className="border border-[rgba(252,203,62,0.42)] bg-[rgba(252,203,62,0.12)] px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-[var(--gold)]">
+                  {excursion.badge}
                 </span>
-                <span className="border border-white/14 px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-white/64">
-                  {excursionRhythmLabels[excursion.rhythm]}
-                </span>
-                <span className="border border-white/14 px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-white/64">
-                  {excursion.duration}
-                </span>
-                {excursion.badge ? (
-                  <span className="border border-[rgba(252,203,62,0.42)] bg-[rgba(252,203,62,0.12)] px-3 py-1 text-[0.62rem] tracking-[0.2em] uppercase text-[var(--gold)]">
-                    {excursion.badge}
-                  </span>
-                ) : null}
-              </div>
+              ) : null}
             </div>
-
-            <EditorialVisual
-              visual={excursion.visual}
-              title={excursion.editorialTitle}
-              meta={excursion.location}
-              density="cinematic"
-              className="min-h-[360px]"
-              imageSrc={excursion.heroImage}
-              imageAlt={`Hero de ${excursion.shortTitle}`}
-            />
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <WhatsAppButton
               message={excursion.whatsappMessage}
-              className="justify-center rounded-none px-6 py-3 text-[0.72rem] tracking-[0.12em] uppercase"
+              className={`${editorialSquareWhatsAppButtonClassName} px-6 text-[0.72rem]`}
               ariaLabel={`Consultar ${excursion.shortTitle} por WhatsApp`}
             >
               Reservar o consultar por WhatsApp
             </WhatsAppButton>
             <Link
               href="/excursiones"
-              className="inline-flex min-h-11 items-center justify-center border border-white/18 px-6 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-white/84 transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
+              className={editorialSquareDarkGhostCtaClassName}
             >
               Volver al listado
             </Link>
@@ -174,52 +188,7 @@ export function ExcursionDetailPage({ excursion }: { excursion: Excursion }) {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:px-10 md:py-20">
-        <div className="mx-auto max-w-[1200px] space-y-8">
-          <div className="grid gap-6 border-b border-[var(--border-default)] pb-8 lg:grid-cols-[0.6fr_1.4fr] lg:items-end">
-            <div>
-              <SectionEyebrow>Galeria Editorial</SectionEyebrow>
-              <h2 className="mt-4 font-display text-[2rem] leading-[1.02] text-[var(--text-primary)] md:text-[2.8rem]">
-                Visuales conectados al modelo central, listos para assets reales.
-              </h2>
-            </div>
-            <p className="max-w-[50ch] text-[0.96rem] leading-8 text-[var(--text-secondary)]">
-              Si la foto existe, entra en escena. Si no, el placeholder editorial mantiene el look premium sin romper la experiencia.
-            </p>
-          </div>
-
-          <div className="grid gap-px overflow-hidden border border-[var(--border-default)] bg-[var(--border-default)] lg:grid-cols-[1.1fr_0.9fr]">
-            <EditorialVisual
-              visual={excursion.visual}
-              title={excursion.editorialTitle}
-              meta={excursion.heroKicker}
-              className="min-h-[360px]"
-              imageSrc={galleryItems[0]}
-              imageAlt={`Galeria principal de ${excursion.shortTitle}`}
-            />
-            <div className="grid gap-px bg-[var(--border-default)]">
-              <EditorialVisual
-                visual={excursion.visual}
-                title={excursion.highlights[0] ?? excursion.shortTitle}
-                meta="Detalle 01"
-                density="compact"
-                className="min-h-[180px]"
-                imageSrc={galleryItems[1]}
-                imageAlt={`Galeria detalle 1 de ${excursion.shortTitle}`}
-              />
-              <EditorialVisual
-                visual={excursion.visual}
-                title={excursion.highlights[1] ?? excursion.location}
-                meta="Detalle 02"
-                density="compact"
-                className="min-h-[180px]"
-                imageSrc={galleryItems[2]}
-                imageAlt={`Galeria detalle 2 de ${excursion.shortTitle}`}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <ExcursionEditorialGallery excursion={excursion} media={media} />
 
       <section className="border-y border-[var(--border-default)] bg-white px-5 py-16 md:px-10 md:py-20">
         <div className="mx-auto grid max-w-[1200px] gap-px overflow-hidden border border-[var(--border-default)] bg-[var(--border-default)] md:grid-cols-3">
@@ -281,14 +250,14 @@ export function ExcursionDetailPage({ excursion }: { excursion: Excursion }) {
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <WhatsAppButton
               message={excursion.whatsappMessage}
-              className="justify-center rounded-none px-6 py-3 text-[0.72rem] tracking-[0.12em] uppercase"
+              className={`${editorialSquareWhatsAppButtonClassName} px-6 text-[0.72rem]`}
               ariaLabel={`Escribir por WhatsApp sobre ${excursion.shortTitle}`}
             >
               Consultar disponibilidad
             </WhatsAppButton>
             <Link
               href="/excursiones"
-              className="inline-flex min-h-11 items-center justify-center border border-white/18 px-6 py-3 text-[0.68rem] font-semibold tracking-[0.16em] uppercase text-white/84 transition-colors hover:border-[var(--gold)] hover:text-[var(--gold)]"
+              className={editorialSquareDarkGhostCtaClassName}
             >
               Ver mas salidas
             </Link>

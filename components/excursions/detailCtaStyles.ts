@@ -1,2 +1,1 @@
-export const excursionDetailCtaClassName =
-  "inline-flex min-h-11 items-center justify-center rounded-none border border-[var(--brand-accent-1)] bg-[var(--brand-accent-1)] px-5 py-3 text-[0.68rem] font-semibold tracking-[0.12em] uppercase text-[var(--text-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] hover:bg-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] hover:text-[var(--text-primary)] hover:shadow-[0_0_24px_rgba(236,249,62,0.24)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-accent-1)]";
+export { excursionDetailCtaClassName } from "@/components/ui/buttonStyles";

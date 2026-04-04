@@ -47,7 +47,7 @@ export function ExperiencesSection() {
       {/* Vertical rule */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[var(--home-section-y)] left-5 top-[var(--home-section-y)] z-10 hidden w-px md:block md:left-10"
+        className="pointer-events-none absolute bottom-[var(--home-section-y)] left-5 top-0 z-10 hidden w-px md:block md:left-10"
         style={{
           background:
             "linear-gradient(to bottom, var(--brand-primary) 0%, var(--gold) 40%, transparent 100%)",
@@ -55,7 +55,7 @@ export function ExperiencesSection() {
         }}
       />
 
-        <div className="relative z-20 mx-auto max-w-[1200px] px-5 py-[var(--home-section-y)] md:px-10 md:py-[var(--home-section-y-lg)]">
+        <div className="relative z-20 mx-auto max-w-[1200px] px-5 pb-[var(--home-section-y)] md:px-10 md:pb-[var(--home-section-y-lg)]">
 
         {/* ── Header ─────────────────────────────────────────── */}
         <div
