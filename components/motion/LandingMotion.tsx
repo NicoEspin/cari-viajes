@@ -164,10 +164,22 @@ export function LandingMotion() {
           });
           reveal(".experience-card", { y: 32, stagger: 0.1, start: "top 80%" });
 
-          reveal("#galeria [data-reveal]", {
+          reveal("#galeria [data-reveal]:not([data-gallery-marquee-viewport])", {
             y: 24,
             stagger: 0.08,
             start: "top 84%",
+          });
+
+          gsap.from("#galeria [data-gallery-marquee-viewport]", {
+            autoAlpha: 0,
+            duration: 0.72,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#galeria",
+              start: "top 84%",
+              once: true,
+            },
+            clearProps: "opacity,visibility",
           });
 
           const queueGallerySetup = () => {

@@ -187,6 +187,7 @@ function GalleryMarqueeViewport({
     <div
       className={`gallery-marquee-viewport relative overflow-hidden ${className}`.trim()}
       data-reveal={dataReveal ? true : undefined}
+      data-gallery-marquee-viewport={dataReveal ? true : undefined}
       style={{
         maskImage:
           "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
