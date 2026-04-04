@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import Image, { type StaticImageData } from "next/image";
+import { GalleryMarqueeViewport } from "@/components/motion/GalleryMarqueeViewport";
 import { excursions } from "@/content/excursions";
 import { getExcursionMediaBySlug } from "@/lib/excursion-media";
 import { SectionEyebrow } from "../ui/SectionEyebrow";
@@ -65,7 +65,7 @@ export function GallerySection() {
     <section
       id="galeria"
       aria-label="Galeria de experiencias"
-      className="relative flex min-h-[100dvh] scroll-mt-24 overflow-hidden bg-[var(--neutral-950)] text-[var(--text-on-dark)] md:scroll-mt-28 lg:min-h-[118vh] xl:min-h-[124vh]"
+      className="relative flex min-h-screen scroll-mt-24 overflow-hidden bg-[var(--neutral-950)] text-[var(--text-on-dark)] min-[0px]:min-h-[100svh] md:scroll-mt-28 lg:min-h-[118vh] xl:min-h-[124vh]"
     >
       <div
         aria-hidden="true"
@@ -134,7 +134,12 @@ export function GallerySection() {
             }}
           />
 
-          <GalleryMarqueeViewport className="lg:hidden" dataReveal>
+          <GalleryMarqueeViewport
+            className="lg:hidden"
+            dataReveal
+            direction="left"
+            duration={getGalleryDuration(gallerySlides.length, "mobile")}
+          >
             <GalleryMarquee
               slides={gallerySlides}
               direction="left"
@@ -144,7 +149,11 @@ export function GallerySection() {
           </GalleryMarqueeViewport>
 
           <div className="hidden flex-1 flex-col justify-center gap-5 lg:flex">
-            <GalleryMarqueeViewport dataReveal>
+            <GalleryMarqueeViewport
+              dataReveal
+              direction="left"
+              duration={getGalleryDuration(desktopTrackLeft.length, "desktop")}
+            >
               <GalleryMarquee
                 slides={desktopTrackLeft}
                 direction="left"
@@ -156,7 +165,11 @@ export function GallerySection() {
               />
             </GalleryMarqueeViewport>
 
-            <GalleryMarqueeViewport dataReveal>
+            <GalleryMarqueeViewport
+              dataReveal
+              direction="right"
+              duration={getGalleryDuration(desktopTrackRight.length, "desktop")}
+            >
               <GalleryMarquee
                 slides={desktopTrackRight}
                 direction="right"
@@ -171,30 +184,6 @@ export function GallerySection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function GalleryMarqueeViewport({
-  children,
-  className = "",
-  dataReveal = false,
-}: {
-  children: ReactNode;
-  className?: string;
-  dataReveal?: boolean;
-}) {
-  return (
-    <div
-      className={`gallery-marquee-viewport relative overflow-hidden ${className}`.trim()}
-      data-reveal={dataReveal ? true : undefined}
-      data-gallery-marquee-viewport={dataReveal ? true : undefined}
-      style={{
-        maskImage:
-          "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
-      }}
-    >
-      {children}
-    </div>
   );
 }
 
@@ -214,7 +203,7 @@ function GalleryMarquee({
       className="gallery-marquee flex w-max gap-3 will-change-transform md:gap-4"
       data-direction={direction}
       data-duration={duration}
-      data-gallery-marquee
+      data-gallery-track
     >
       {[...slides, ...slides].map((slide, index) => (
         <GalleryCard
@@ -236,7 +225,7 @@ function GalleryCard({
 }) {
   const sizeClassName =
     size === "mobile"
-      ? "h-[58dvh] w-[82vw] min-w-[82vw]"
+      ? "h-[clamp(24rem,60svh,38rem)] w-[82vw] min-w-[82vw]"
       : "h-[clamp(300px,36vh,420px)] w-[36vw] min-w-[36vw] max-w-[680px]";
 
   return (

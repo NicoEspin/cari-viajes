@@ -3,8 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { socialLinks } from "@/content/social";
+import { requestLandingMotionRefresh } from "@/lib/landing-motion";
 
 declare global {
   interface Window {
@@ -33,12 +34,49 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 );
 
 export function InstagramSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     window.instgrm?.Embeds?.process();
+
+    let frame = 0;
+    let resizeObserver: ResizeObserver | undefined;
+
+    const queueRefresh = (reason: string) => {
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+
+      frame = requestAnimationFrame(() => {
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          requestLandingMotionRefresh(`instagram:${reason}`);
+        });
+      });
+    };
+
+    queueRefresh("mount");
+
+    if (sectionRef.current && typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        queueRefresh("resize");
+      });
+
+      resizeObserver.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+
+      resizeObserver?.disconnect();
+    };
   }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="instagram"
       aria-label="Instagram"
       className="bg-[var(--neutral-50)] px-5 py-[var(--home-section-y)] md:px-10 md:py-[var(--home-section-y-lg)]"
@@ -128,6 +166,7 @@ export function InstagramSection() {
           strategy="lazyOnload"
           onLoad={() => {
             window.instgrm?.Embeds?.process();
+            requestLandingMotionRefresh("instagram:script-load");
           }}
         />
       </div>

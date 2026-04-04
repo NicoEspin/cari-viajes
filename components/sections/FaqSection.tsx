@@ -1,4 +1,5 @@
 import { faqItems } from "@/content/faq";
+import { SectionLayoutSync } from "@/components/motion/SectionLayoutSync";
 import { whatsappMessages } from "@/lib/whatsapp";
 import { SectionEyebrow } from "../ui/SectionEyebrow";
 import { WhatsAppButton } from "../ui/WhatsAppButton";
@@ -10,6 +11,7 @@ export function FaqSection() {
       aria-label="Preguntas frecuentes"
       className="relative scroll-mt-24 overflow-hidden bg-[var(--neutral-50)] px-5 py-[var(--home-section-y)] md:px-10 md:py-[var(--home-section-y-lg)] md:scroll-mt-28"
     >
+      <SectionLayoutSync sectionId="faq" toggle />
       <div className="mx-auto w-full max-w-[1200px]">
         {/* Header — full width, generous */}
         <div className="mb-[var(--home-section-header-gap)] grid gap-8 md:mb-[var(--home-section-header-gap-lg)] md:grid-cols-2 md:gap-16">

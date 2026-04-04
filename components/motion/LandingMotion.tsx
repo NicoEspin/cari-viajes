@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { LANDING_MOTION_REFRESH_EVENT } from "@/lib/landing-motion";
 
 export function LandingMotion() {
   useEffect(() => {
@@ -13,18 +14,18 @@ export function LandingMotion() {
         import("gsap/ScrollTrigger"),
       ]);
 
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
 
       gsap.registerPlugin(ScrollTrigger);
+      const root = document.getElementById("landing-root");
+
+      if (!root) {
+        return;
+      }
+
       const mm = gsap.matchMedia();
-      const heroSequence = [
-        ".hero-eyebrow",
-        ".hero-heading",
-        ".hero-support-copy",
-        ".hero-actions > *",
-        ".hero-note",
-        ".hero-pill",
-      ];
 
       mm.add(
         {
@@ -37,94 +38,135 @@ export function LandingMotion() {
             desktop: boolean;
           };
 
-          const galleryTweens: Array<{ kill: () => void }> = [];
+          let refreshFrame = 0;
+          let lastViewportWidth = window.innerWidth;
 
-          const reveal = (
-            target: string,
+          const queryAll = (selector: string) =>
+            Array.from(root.querySelectorAll<HTMLElement>(selector));
+
+          const queryOne = (selector: string) => root.querySelector<HTMLElement>(selector);
+
+          const queryWithin = (sectionSelector: string, selector: string) => {
+            const section = queryOne(sectionSelector);
+
+            if (!section) {
+              return [] as HTMLElement[];
+            }
+
+            return Array.from(section.querySelectorAll<HTMLElement>(selector));
+          };
+
+          const queueScrollRefresh = () => {
+            if (refreshFrame) {
+              cancelAnimationFrame(refreshFrame);
+            }
+
+            refreshFrame = requestAnimationFrame(() => {
+              refreshFrame = requestAnimationFrame(() => {
+                refreshFrame = 0;
+                ScrollTrigger.refresh();
+              });
+            });
+          };
+
+          const revealElements = (
+            elements: HTMLElement[],
             options?: { y?: number; duration?: number; stagger?: number; start?: string },
           ) => {
-            gsap.from(target, {
-              autoAlpha: 0,
-              y: options?.y ?? 28,
-              duration: options?.duration ?? 0.8,
-              ease: "power3.out",
-              stagger: options?.stagger,
-              scrollTrigger: {
-                trigger: target,
-                start: options?.start ?? "top 88%",
-                once: true,
-              },
-              clearProps: "opacity,visibility,transform",
+            if (!elements.length) {
+              return;
+            }
+
+            elements.forEach((element, index) => {
+              gsap.from(element, {
+                autoAlpha: 0,
+                y: options?.y ?? 28,
+                duration: options?.duration ?? 0.8,
+                delay: (options?.stagger ?? 0) * index,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: element,
+                  start: options?.start ?? "top 88%",
+                  once: true,
+                },
+                clearProps: "opacity,visibility,transform",
+              });
             });
           };
 
-          const setupGalleryMarquees = () => {
-            galleryTweens.forEach((tween) => tween.kill());
-            galleryTweens.length = 0;
-
-            const tracks = Array.from(
-              document.querySelectorAll<HTMLElement>("[data-gallery-marquee]"),
-            );
-
-            tracks.forEach((track) => {
-              const halfWidth = track.scrollWidth / 2;
-              const duration = Number(track.dataset.duration ?? 24);
-              const direction = track.dataset.direction === "right" ? "right" : "left";
-
-              if (!halfWidth) {
-                return;
-              }
-
-              gsap.set(track, { x: direction === "right" ? -halfWidth : 0 });
-
-              galleryTweens.push(
-                gsap.to(track, {
-                  x: direction === "right" ? 0 : -halfWidth,
-                  duration,
-                  ease: "none",
-                  repeat: -1,
-                }),
-              );
-            });
+          const reveal = (
+            sectionSelector: string,
+            selector: string,
+            options?: { y?: number; duration?: number; stagger?: number; start?: string },
+          ) => {
+            revealElements(queryWithin(sectionSelector, selector), options);
           };
+
+          const heroEyebrow = queryOne(".hero-eyebrow");
+          const heroHeading = queryOne(".hero-heading");
+          const heroSupportCopy = queryOne(".hero-support-copy");
+          const heroActions = queryAll(".hero-actions > *");
+          const heroNote = queryOne(".hero-note");
+          const heroPills = queryAll(".hero-pill");
+          const heroSequence = [
+            heroEyebrow,
+            heroHeading,
+            heroSupportCopy,
+            ...heroActions,
+            heroNote,
+            ...heroPills,
+          ].filter((element): element is HTMLElement => Boolean(element));
 
           if (reduceMotion) {
             gsap.set(heroSequence, { clearProps: "all" });
+            gsap.set(queryAll("[data-reveal]"), { clearProps: "all" });
             return;
           }
 
-          gsap.set(heroSequence, { autoAlpha: 0, y: 18 });
+          if (heroSequence.length) {
+            gsap.set(heroSequence, { autoAlpha: 0, y: 18 });
+          }
 
-          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+          const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-          tl.to(".hero-eyebrow", {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.52,
-            clearProps: "opacity,visibility,transform",
-          })
-            .to(
-              ".hero-heading",
+          if (heroEyebrow) {
+            heroTimeline.to(heroEyebrow, {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.52,
+              clearProps: "opacity,visibility,transform",
+            });
+          }
+
+          if (heroHeading) {
+            heroTimeline.to(
+              heroHeading,
               {
                 autoAlpha: 1,
                 y: 0,
                 duration: 0.78,
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.2",
-            )
-            .to(
-              ".hero-support-copy",
+              heroEyebrow ? "-=0.2" : undefined,
+            );
+          }
+
+          if (heroSupportCopy) {
+            heroTimeline.to(
+              heroSupportCopy,
               {
                 autoAlpha: 1,
                 y: 0,
                 duration: 0.58,
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.42",
-            )
-            .to(
-              ".hero-actions > *",
+              heroHeading || heroEyebrow ? "-=0.42" : undefined,
+            );
+          }
+
+          if (heroActions.length) {
+            heroTimeline.to(
+              heroActions,
               {
                 autoAlpha: 1,
                 y: 0,
@@ -132,20 +174,28 @@ export function LandingMotion() {
                 stagger: 0.08,
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.3",
-            )
-            .to(
-              ".hero-note",
+              heroSupportCopy || heroHeading || heroEyebrow ? "-=0.3" : undefined,
+            );
+          }
+
+          if (heroNote) {
+            heroTimeline.to(
+              heroNote,
               {
                 autoAlpha: 1,
                 y: 0,
                 duration: 0.54,
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.22",
-            )
-            .to(
-              ".hero-pill",
+              heroActions.length || heroSupportCopy || heroHeading || heroEyebrow
+                ? "-=0.22"
+                : undefined,
+            );
+          }
+
+          if (heroPills.length) {
+            heroTimeline.to(
+              heroPills,
               {
                 autoAlpha: 1,
                 y: 0,
@@ -153,131 +203,126 @@ export function LandingMotion() {
                 stagger: 0.06,
                 clearProps: "opacity,visibility,transform",
               },
-              "-=0.34",
+              heroNote || heroActions.length || heroSupportCopy || heroHeading || heroEyebrow
+                ? "-=0.34"
+                : undefined,
             );
+          }
 
-          reveal("#propuesta [data-reveal]", { y: 24, stagger: 0.12, start: "top 82%" });
-          reveal("#excursiones [data-reveal]:not(.experience-card)", {
+          reveal("#propuesta", "[data-reveal]", { y: 24, stagger: 0.12, start: "top 82%" });
+          reveal("#excursiones", "[data-reveal]:not(.experience-card)", {
             y: 24,
             stagger: 0.1,
             start: "top 84%",
           });
-          reveal(".experience-card", { y: 32, stagger: 0.1, start: "top 80%" });
+          revealElements(queryAll(".experience-card"), {
+            y: 32,
+            stagger: 0.1,
+            start: "top 80%",
+          });
 
-          reveal("#galeria [data-reveal]:not([data-gallery-marquee-viewport])", {
+          reveal("#galeria", "[data-reveal]:not([data-gallery-marquee-viewport])", {
             y: 24,
             stagger: 0.08,
             start: "top 84%",
           });
-
-          gsap.from("#galeria [data-gallery-marquee-viewport]", {
-            autoAlpha: 0,
+          revealElements(queryWithin("#galeria", "[data-gallery-marquee-viewport]"), {
+            y: 0,
             duration: 0.72,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: "#galeria",
-              start: "top 84%",
-              once: true,
-            },
-            clearProps: "opacity,visibility",
+            start: "top 84%",
           });
 
-          const queueGallerySetup = () => {
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                setupGalleryMarquees();
-              });
-            });
-          };
-
-          queueGallerySetup();
-
-          const handleResize = () => {
-            queueGallerySetup();
-          };
-
-          window.addEventListener("resize", handleResize);
-
-          let resizeObserver: ResizeObserver | undefined;
-
-          if (typeof ResizeObserver !== "undefined") {
-            resizeObserver = new ResizeObserver(() => {
-              queueGallerySetup();
-            });
-
-            document
-              .querySelectorAll<HTMLElement>("[data-gallery-marquee]")
-              .forEach((track) => resizeObserver?.observe(track));
-          }
-
-          reveal("#testimonios [data-reveal]", {
+          reveal("#testimonios", "[data-reveal]", {
             y: 24,
             stagger: 0.08,
             start: "top 84%",
           });
-          reveal(".metric-card", { y: 20, stagger: 0.08, start: "top 86%" });
+          revealElements(queryAll(".metric-card"), { y: 20, stagger: 0.08, start: "top 86%" });
 
-          reveal("#contacto [data-reveal]", {
+          reveal("#contacto", "[data-reveal]", {
             y: 24,
             stagger: 0.1,
             start: "top 82%",
           });
 
-          gsap.from("#contacto .cta-main-button", {
-            autoAlpha: 0,
-            y: 14,
-            scale: 0.96,
-            duration: 0.64,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: "#contacto",
-              start: "top 82%",
-              once: true,
-            },
-            clearProps: "opacity,visibility,transform",
-          });
-
-          reveal("#instagram [data-reveal]:not(.insta-item)", {
+          reveal("#instagram", "[data-reveal]:not(.insta-item)", {
             y: 20,
             stagger: 0.06,
             start: "top 85%",
           });
 
-          gsap.from(".insta-item", {
-            autoAlpha: 0,
-            scale: 0.95,
-            y: 16,
-            duration: 0.54,
-            stagger: 0.05,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: "#instagram",
-              start: "top 80%",
-              once: true,
-            },
-            clearProps: "opacity,visibility,transform",
-          });
+          const instagramItems = queryWithin("#instagram", ".insta-item");
 
-          reveal("#faq [data-reveal]", { y: 20, stagger: 0.08, start: "top 86%" });
-
-          if (desktop) {
-            gsap.to(".hero-media", {
-              yPercent: 6,
-              scale: 1.02,
-              ease: "none",
+          if (instagramItems.length) {
+            gsap.from(instagramItems, {
+              autoAlpha: 0,
+              scale: 0.95,
+              y: 16,
+              duration: 0.54,
+              stagger: 0.05,
+              ease: "power2.out",
               scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
+                trigger: "#instagram",
+                start: "top 80%",
+                once: true,
               },
+              clearProps: "opacity,visibility,transform",
             });
           }
 
+          reveal("#faq", "[data-reveal]", { y: 20, stagger: 0.08, start: "top 86%" });
+
+          if (desktop) {
+            const heroMedia = queryOne(".hero-media");
+            const heroSection = queryOne("#hero");
+
+            if (heroMedia && heroSection) {
+              gsap.to(heroMedia, {
+                yPercent: 6,
+                scale: 1.02,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: heroSection,
+                  start: "top top",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              });
+            }
+          }
+
+          queueScrollRefresh();
+
+          const handleResize = () => {
+            const nextViewportWidth = window.innerWidth;
+
+            if (Math.abs(nextViewportWidth - lastViewportWidth) >= 2) {
+              lastViewportWidth = nextViewportWidth;
+            }
+
+            queueScrollRefresh();
+          };
+
+          const handleLoad = () => {
+            queueScrollRefresh();
+          };
+
+          const handleMotionRefresh = () => {
+            queueScrollRefresh();
+          };
+
+          window.addEventListener("resize", handleResize);
+          window.addEventListener("load", handleLoad);
+          window.addEventListener(LANDING_MOTION_REFRESH_EVENT, handleMotionRefresh);
+
           return () => {
             window.removeEventListener("resize", handleResize);
-            resizeObserver?.disconnect();
-            galleryTweens.forEach((tween) => tween.kill());
+            window.removeEventListener("load", handleLoad);
+            window.removeEventListener(LANDING_MOTION_REFRESH_EVENT, handleMotionRefresh);
+
+            if (refreshFrame) {
+              cancelAnimationFrame(refreshFrame);
+            }
           };
         },
       );
@@ -285,7 +330,7 @@ export function LandingMotion() {
       dispose = () => mm.revert();
     }
 
-    init();
+    void init();
 
     return () => {
       mounted = false;

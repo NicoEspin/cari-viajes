@@ -3,7 +3,7 @@
 import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { editorialSquareWhatsAppButtonClassName } from "@/components/ui/buttonStyles";
 import { navbarLinks } from "@/content/navigation";
 import { whatsappMessages } from "@/lib/whatsapp";
@@ -36,8 +36,18 @@ export function Navbar() {
   const lineMiddleRef = useRef<HTMLSpanElement>(null);
   const lineBottomRef = useRef<HTMLSpanElement>(null);
   const mobileLinkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const hasSyncedInitialMenuStateRef = useRef(false);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const restoreMenuTriggerFocus = useCallback(() => {
+    if (document.activeElement instanceof HTMLElement && menuLayerRef.current?.contains(document.activeElement)) {
+      menuButtonRef.current?.focus();
+    }
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    restoreMenuTriggerFocus();
+    setIsMenuOpen(false);
+  }, [restoreMenuTriggerFocus]);
 
   const getMenuOrigin = () => {
     const rect = menuButtonRef.current?.getBoundingClientRect();
@@ -64,7 +74,14 @@ export function Navbar() {
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, [isMenuOpen]);
+  }, [closeMenu, isMenuOpen]);
+
+  useEffect(() => {
+    const layer = menuLayerRef.current;
+    if (!layer) return;
+
+    layer.inert = !isMenuOpen;
+  }, [closeMenu, isMenuOpen]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -73,7 +90,7 @@ export function Navbar() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isMenuOpen]);
+  }, [closeMenu, isMenuOpen]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -82,10 +99,10 @@ export function Navbar() {
     };
     mediaQuery.addEventListener("change", onViewportChange);
     return () => mediaQuery.removeEventListener("change", onViewportChange);
-  }, []);
+  }, [closeMenu]);
 
   // FIX 1: Inicializar el estado cerrado del menú una sola vez al montar
-  useEffect(() => {
+  useLayoutEffect(() => {
     const layer = menuLayerRef.current;
     const reveal = menuRevealRef.current;
     const backdrop = menuBackdropRef.current;
@@ -170,7 +187,6 @@ export function Navbar() {
       tl.kill();
       gsap.killTweensOf([layer, reveal, backdrop, copy, cta, ...linkTargets]);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Animación del ícono hamburguesa y control del timeline
@@ -178,8 +194,20 @@ export function Navbar() {
     const lineTop = lineTopRef.current;
     const lineMiddle = lineMiddleRef.current;
     const lineBottom = lineBottomRef.current;
+    const tl = timelineRef.current;
 
     if (!lineTop || !lineMiddle || !lineBottom) return;
+
+    if (!tl) return;
+
+    if (!hasSyncedInitialMenuStateRef.current) {
+      hasSyncedInitialMenuStateRef.current = true;
+      gsap.set(lineTop, { y: 0, rotation: 0, transformOrigin: "center center" });
+      gsap.set(lineMiddle, { autoAlpha: 1, x: 0 });
+      gsap.set(lineBottom, { y: 0, rotation: 0, transformOrigin: "center center" });
+      tl.pause(0);
+      return;
+    }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const iconDuration = reducedMotion ? 0 : 0.24;
@@ -207,9 +235,6 @@ export function Navbar() {
       ease: "power2.out",
       transformOrigin: "center center",
     });
-
-    const tl = timelineRef.current;
-    if (!tl) return;
 
     if (reducedMotion) {
       const layer = menuLayerRef.current;
@@ -308,7 +333,7 @@ export function Navbar() {
           <button
             ref={menuButtonRef}
             type="button"
-            className="relative inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-white/12 bg-[linear-gradient(145deg,rgba(244,247,246,0.14),rgba(17,24,22,0.88))] shadow-[0_20px_45px_rgba(7,10,9,0.32)] transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand-accent-1)] md:hidden"
+            className="relative inline-flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/12 bg-[linear-gradient(145deg,rgba(244,247,246,0.14),rgba(17,24,22,0.88))] shadow-[0_20px_45px_rgba(7,10,9,0.32)] transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand-accent-1)] md:hidden"
             aria-expanded={isMenuOpen}
             aria-controls={menuId}
             aria-label={isMenuOpen ? "Cerrar menu de navegacion" : "Abrir menu de navegacion"}
@@ -346,7 +371,6 @@ export function Navbar() {
         ref={menuLayerRef}
         id={menuId}
         className="pointer-events-none fixed inset-0 z-40 h-[100dvh] w-full opacity-0 md:hidden"
-        aria-hidden={!isMenuOpen}
         role="dialog"
         aria-modal="true"
         aria-label="Menu de navegacion"

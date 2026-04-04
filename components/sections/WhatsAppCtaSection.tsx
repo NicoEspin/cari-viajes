@@ -93,7 +93,7 @@ export function WhatsAppCtaSection() {
           <div className="flex flex-col items-start gap-6 lg:items-end" data-reveal>
             <WhatsAppButton
               message={whatsappMessages.cta}
-              className="group inline-flex items-center gap-4 border border-white/30 px-8 py-5 text-[10px] tracking-[0.2em] uppercase text-white transition-all duration-300 hover:border-[var(--gold,#C8A84B)] hover:text-[var(--gold,#C8A84B)]"
+              className="cta-main-button group inline-flex items-center gap-4 border border-white/30 px-8 py-5 text-[10px] tracking-[0.2em] uppercase text-white transition-all duration-300 hover:border-[var(--gold,#C8A84B)] hover:text-[var(--gold,#C8A84B)]"
               style={{ borderRadius: 0, background: "transparent" }}
             >
               Escribinos por WhatsApp

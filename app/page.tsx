@@ -55,7 +55,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Navbar />
-      <main>
+      <main id="landing-root">
         <HeroSection />
         <ValuePropSection />
         <ExperiencesSection />

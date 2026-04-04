@@ -104,7 +104,7 @@ export function SocialProofSection() {
           {trustMetrics.map((metric) => (
             <li
               key={metric.label}
-              className="group rounded-xl border border-[var(--border-default)] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border-hover)]"
+              className="metric-card group rounded-xl border border-[var(--border-default)] bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border-hover)]"
             >
               <p className="font-display text-4xl font-bold leading-none text-[var(--text-primary)]">
                 {metric.value}
