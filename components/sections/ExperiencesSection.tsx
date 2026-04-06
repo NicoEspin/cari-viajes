@@ -10,6 +10,7 @@ import { getExcursionAssetBySlug } from "@/lib/excursion-assets";
 import {
   editorialSquareDarkGhostCtaClassName,
   editorialSquarePrimaryCtaClassName,
+  editorialSquarePrimaryStaticChipClassName,
 } from "../ui/buttonStyles";
 import { SectionEyebrow } from "../ui/SectionEyebrow";
 
@@ -150,6 +151,7 @@ function ExcursionCardHero({
   index: number;
 }) {
   const image = getExperienceImage(experience);
+  const mobileCardCtaClassName = `${editorialSquarePrimaryStaticChipClassName} px-4 py-2 text-[0.62rem] tracking-[0.14em] group-hover:-translate-y-0.5 group-hover:border-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-hover:bg-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-hover:shadow-[0_0_24px_rgba(236,249,62,0.2)] group-focus-visible:-translate-y-0.5 group-focus-visible:border-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-focus-visible:bg-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-focus-visible:shadow-[0_0_24px_rgba(236,249,62,0.2)]`;
 
   return (
     <Link
@@ -207,7 +209,7 @@ function ExcursionCardHero({
                 <p className="mt-1 text-[10px] text-[var(--text-secondary)]">{experience.location}</p>
               </div>
 
-              <span className="inline-flex items-center text-[10px] tracking-[0.16em] uppercase text-[var(--brand-primary)]">
+              <span className={mobileCardCtaClassName}>
                 Ver excursion
               </span>
             </div>
@@ -292,6 +294,7 @@ function ExcursionCardSmall({
   index: number;
 }) {
   const image = getExperienceImage(experience);
+  const mobileCardCtaClassName = `${editorialSquarePrimaryStaticChipClassName} px-4 py-2 text-[0.62rem] tracking-[0.14em] group-hover:-translate-y-0.5 group-hover:border-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-hover:bg-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-hover:shadow-[0_0_24px_rgba(236,249,62,0.2)] group-focus-visible:-translate-y-0.5 group-focus-visible:border-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-focus-visible:bg-[color-mix(in_srgb,var(--brand-accent-1)_82%,var(--text-primary))] group-focus-visible:shadow-[0_0_24px_rgba(236,249,62,0.2)]`;
 
   return (
     <Link
@@ -343,7 +346,7 @@ function ExcursionCardSmall({
 
             <div className="mt-auto flex items-center justify-between gap-4 border-t border-[var(--border-default)] pt-4">
               <span className="text-[10px] text-[var(--text-secondary)]">{experience.heroKicker}</span>
-              <span className="inline-flex items-center text-[10px] tracking-[0.16em] uppercase text-[var(--brand-primary)]">
+              <span className={mobileCardCtaClassName}>
                 Ver excursion
               </span>
             </div>
