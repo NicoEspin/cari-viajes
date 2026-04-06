@@ -7,6 +7,10 @@ import {
   type Excursion,
 } from "@/content/excursions";
 import { getExcursionAssetBySlug } from "@/lib/excursion-assets";
+import {
+  editorialSquareDarkGhostCtaClassName,
+  editorialSquarePrimaryCtaClassName,
+} from "../ui/buttonStyles";
 import { SectionEyebrow } from "../ui/SectionEyebrow";
 
 const routeModes = [
@@ -100,9 +104,9 @@ export function ExperiencesSection() {
 
             <Link
               href="/excursiones"
-              className="inline-flex items-center gap-2 text-[10px] tracking-[0.18em] uppercase text-[var(--brand-primary)] transition-[gap] duration-300 hover:gap-3.5"
+              className={`${editorialSquarePrimaryCtaClassName} w-fit px-6 text-[0.72rem]`}
             >
-              Ver mapa completo -&gt;
+              Ver mapa completo
             </Link>
           </div>
         </div>
@@ -120,15 +124,15 @@ export function ExperiencesSection() {
         </div>
 
         {/* ── Bottom bar ─────────────────────────────────────── */}
-        <div className="mt-[var(--home-section-footer-gap)] flex items-center justify-between bg-[var(--text-primary)] px-7 py-5 md:mt-[var(--home-section-footer-gap-lg)]">
+        <div className="mt-[var(--home-section-footer-gap)] flex flex-col items-start gap-4 bg-[var(--text-primary)] px-7 py-5 md:mt-[var(--home-section-footer-gap-lg)] md:flex-row md:items-center md:justify-between">
           <span className="text-[10px] tracking-[0.16em] uppercase text-white/50">
             {excursions.length} experiencias curadas en la data central
           </span>
           <Link
             href="/excursiones"
-            className="inline-flex items-center gap-2 text-[10px] tracking-[0.18em] uppercase text-[var(--gold)] transition-[gap] duration-300 hover:gap-3.5"
+            className={`${editorialSquareDarkGhostCtaClassName} px-6 text-[0.72rem]`}
           >
-            Ver todos los recorridos -&gt;
+            Ver todos los recorridos
           </Link>
         </div>
       </div>
@@ -203,9 +207,8 @@ function ExcursionCardHero({
                 <p className="mt-1 text-[10px] text-[var(--text-secondary)]">{experience.location}</p>
               </div>
 
-              <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.16em] uppercase text-[var(--brand-primary)]">
+              <span className="inline-flex items-center text-[10px] tracking-[0.16em] uppercase text-[var(--brand-primary)]">
                 Ver excursion
-                <span aria-hidden="true">-&gt;</span>
               </span>
             </div>
           </div>
@@ -340,9 +343,8 @@ function ExcursionCardSmall({
 
             <div className="mt-auto flex items-center justify-between gap-4 border-t border-[var(--border-default)] pt-4">
               <span className="text-[10px] text-[var(--text-secondary)]">{experience.heroKicker}</span>
-              <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.16em] uppercase text-[var(--brand-primary)]">
+              <span className="inline-flex items-center text-[10px] tracking-[0.16em] uppercase text-[var(--brand-primary)]">
                 Ver excursion
-                <span aria-hidden="true">-&gt;</span>
               </span>
             </div>
           </div>
