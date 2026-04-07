@@ -1,4 +1,9 @@
 import type { StaticImageData } from "next/image";
+import sieteCascadasGallery1 from "@/app/assets/7-cascadas/gallery-1.webp";
+import sieteCascadasGallery2 from "@/app/assets/7-cascadas/gallery-2.webp";
+import sieteCascadasGallery3 from "@/app/assets/7-cascadas/gallery-3.webp";
+import sieteCascadasGallery4 from "@/app/assets/7-cascadas/gallery-4.webp";
+import sieteCascadasHero from "@/app/assets/7-cascadas/7-cascadas-hero.webp";
 import aerosillaGallery1 from "@/app/assets/aerosilla/gallery-1.webp";
 import aerosillaGallery2 from "@/app/assets/aerosilla/gallery-2.webp";
 import aerosillaGallery3 from "@/app/assets/aerosilla/gallery-3.webp";
@@ -68,6 +73,7 @@ function mediaImage(image: StaticImageData, alt: string, objectPosition?: string
 }
 
 export const excursionFolderKeyBySlug = {
+  "7-cascadas": "7-cascadas",
   aerosilla: "aerosilla",
   "altas-cumbres-tuneles": "altas-cumbres",
   "bar-de-hielo": "icebar",
@@ -80,6 +86,17 @@ export const excursionFolderKeyBySlug = {
 } as const satisfies Partial<Record<string, string>>;
 
 const excursionMediaBySlug: Record<string, ExcursionMedia> = {
+  "7-cascadas": {
+    folderKey: excursionFolderKeyBySlug["7-cascadas"],
+    hero: mediaImage(sieteCascadasHero, "Piletones y cascadas de 7 Cascadas en La Falda entre piedra y vegetacion", "center 46%"),
+    gallerySource: "real",
+    gallery: [
+      mediaImage(sieteCascadasGallery1, "Vista general de 7 Cascadas en La Falda con agua serrana y rocas claras", "center center"),
+      mediaImage(sieteCascadasGallery2, "Recorrido por 7 Cascadas con piletones naturales y entorno verde", "center 44%"),
+      mediaImage(sieteCascadasGallery3, "Sector de cascadas en La Falda con caida de agua y piedra serrana", "center center"),
+      mediaImage(sieteCascadasGallery4, "Postal de 7 Cascadas con agua en movimiento y paisaje serrano abierto", "center 42%"),
+    ],
+  },
   aerosilla: {
     folderKey: excursionFolderKeyBySlug.aerosilla,
     hero: mediaImage(aerosillaHero, "Cabinas de la Aerosilla con vista abierta sobre Villa Carlos Paz", "center center"),

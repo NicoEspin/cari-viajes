@@ -128,15 +128,20 @@ const excursionRecords: ExcursionRecord[] = [
       },
       {
         title: "Recorrido guiado",
-        detail: "Lectura del paisaje, datos de la ciudad y puntos emblematicos alrededor del San Roque.",
+        detail:
+          "Lectura del paisaje, datos de la ciudad y puntos emblematicos alrededor del San Roque.",
       },
       {
         title: "Cierre con ritmo",
-        detail: "Musica en vivo, servicio de bar y tiempo para fotos durante la navegacion.",
+        detail:
+          "Musica en vivo, servicio de bar y tiempo para fotos durante la navegacion.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Primer dia, familias, parejas y planes suaves" },
+      {
+        label: "Ideal para",
+        value: "Primer dia, familias, parejas y planes suaves",
+      },
       { label: "Logistica", value: "Reserva previa y opcion de traslado" },
       { label: "Sensacion", value: "Ciudad desde otra perspectiva" },
     ],
@@ -198,7 +203,8 @@ const excursionRecords: ExcursionRecord[] = [
     itinerary: [
       {
         title: "Ingreso a Mundo Irreal",
-        detail: "Recorrido por murales 3D intervenidos a mano para fotos y escenas inmersivas.",
+        detail:
+          "Recorrido por murales 3D intervenidos a mano para fotos y escenas inmersivas.",
       },
       {
         title: "Zona de vestuario",
@@ -206,11 +212,15 @@ const excursionRecords: ExcursionRecord[] = [
       },
       {
         title: "Bar de hielo",
-        detail: "Treinta minutos con musica, tragos y una escenografia completamente helada.",
+        detail:
+          "Treinta minutos con musica, tragos y una escenografia completamente helada.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Grupos de amigos, parejas y escapadas urbanas" },
+      {
+        label: "Ideal para",
+        value: "Grupos de amigos, parejas y escapadas urbanas",
+      },
       { label: "Reserva", value: "Obligatoria por cupos limitados" },
       { label: "Tono", value: "Experiencia corta, distinta y muy fotogenica" },
     ],
@@ -277,15 +287,20 @@ const excursionRecords: ExcursionRecord[] = [
       },
       {
         title: "Ascenso panoramico",
-        detail: "Subida al pico maximo con lectura abierta de Carlos Paz y Punilla.",
+        detail:
+          "Subida al pico maximo con lectura abierta de Carlos Paz y Punilla.",
       },
       {
         title: "Recorrido complementario",
-        detail: "Tiempo para sendero autoctono, fotos y pausa en las confiterias.",
+        detail:
+          "Tiempo para sendero autoctono, fotos y pausa en las confiterias.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Familias, escapadas cortas y vistas panoramicas" },
+      {
+        label: "Ideal para",
+        value: "Familias, escapadas cortas y vistas panoramicas",
+      },
       { label: "Compra", value: "Conviene anticiparla para evitar filas" },
       { label: "Plan", value: "Perfecto para sumar a una tarde urbana" },
     ],
@@ -350,7 +365,8 @@ const excursionRecords: ExcursionRecord[] = [
       },
       {
         title: "Recorrido por la ciudad",
-        detail: "Lectura de los principales puntos turisticos de Carlos Paz con guia.",
+        detail:
+          "Lectura de los principales puntos turisticos de Carlos Paz con guia.",
       },
       {
         title: "Parada dulce",
@@ -358,11 +374,18 @@ const excursionRecords: ExcursionRecord[] = [
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Contingentes, viajes estudiantiles y grupos familiares" },
+      {
+        label: "Ideal para",
+        value: "Contingentes, viajes estudiantiles y grupos familiares",
+      },
       { label: "Minimo", value: "10 personas" },
       { label: "Foco", value: "Comodidad, entretenimiento y orden logistico" },
     ],
-    relatedSlugs: ["traslados-especiales", "city-tour-lacustre", "bar-de-hielo"],
+    relatedSlugs: [
+      "traslados-especiales",
+      "city-tour-lacustre",
+      "bar-de-hielo",
+    ],
     visual: {
       eyebrow: "Ruta urbana",
       scene: "Bus, marquesinas y carteles de ruta",
@@ -392,7 +415,8 @@ const excursionRecords: ExcursionRecord[] = [
     duration: "13:30 a 19:30 hs aprox.",
     departure: "Salida desde las 13:30 hs",
     availability: "Temporada regular",
-    location: "Perilago San Roque · Cosquin · La Falda · Capilla del Monte · Los Cocos",
+    location:
+      "Perilago San Roque · Cosquin · La Falda · Capilla del Monte · Los Cocos",
     badge: "Medio dia",
     featuredHome: false,
     featuredCollection: true,
@@ -419,19 +443,25 @@ const excursionRecords: ExcursionRecord[] = [
     itinerary: [
       {
         title: "Salida desde Carlos Paz",
-        detail: "Inicio de la ruta por el perilago San Roque y entrada al valle.",
+        detail:
+          "Inicio de la ruta por el perilago San Roque y entrada al valle.",
       },
       {
         title: "Corazon cultural",
-        detail: "Parada en Cosquin con foco en Plaza Prospero Molina y paso por La Falda.",
+        detail:
+          "Parada en Cosquin con foco en Plaza Prospero Molina y paso por La Falda.",
       },
       {
         title: "Capilla del Monte y Los Cocos",
-        detail: "Piedra El Zapato, calle techada y opcionales en Los Cocos antes del regreso.",
+        detail:
+          "Piedra El Zapato, calle techada y opcionales en Los Cocos antes del regreso.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Quien quiere una excursion serrana sin ocupar todo el dia" },
+      {
+        label: "Ideal para",
+        value: "Quien quiere una excursion serrana sin ocupar todo el dia",
+      },
       { label: "Salida", value: "13:30 hs aprox." },
       { label: "Regreso", value: "19:30 hs aprox." },
     ],
@@ -455,7 +485,8 @@ const excursionRecords: ExcursionRecord[] = [
     slug: "dique-los-molinos-villa-general-belgrano",
     title: "Excursion Dique Los Molinos con V. Gral Belgrano",
     shortTitle: "Dique Los Molinos + Villa General Belgrano",
-    editorialTitle: "Agua, productos regionales y una avenida para quedarse un rato mas.",
+    editorialTitle:
+      "Agua, productos regionales y una avenida para quedarse un rato mas.",
     teaser:
       "Salida de medio dia con city tour por Alta Gracia, degustacion de artesanales en el dique y tiempo libre en Villa General Belgrano.",
     summary:
@@ -496,15 +527,20 @@ const excursionRecords: ExcursionRecord[] = [
       },
       {
         title: "Dique Los Molinos",
-        detail: "Visita al espejo de agua con parada y degustacion de productos regionales.",
+        detail:
+          "Visita al espejo de agua con parada y degustacion de productos regionales.",
       },
       {
         title: "Villa General Belgrano",
-        detail: "Tiempo libre para recorrer la avenida principal, chocolaterias y cervecerias.",
+        detail:
+          "Tiempo libre para recorrer la avenida principal, chocolaterias y cervecerias.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Parejas, familias y amantes del ritmo tranquilo" },
+      {
+        label: "Ideal para",
+        value: "Parejas, familias y amantes del ritmo tranquilo",
+      },
       { label: "Salida", value: "13:30 hs aprox." },
       { label: "Regreso", value: "19:30 hs aprox." },
     ],
@@ -542,7 +578,8 @@ const excursionRecords: ExcursionRecord[] = [
     duration: "8:00 a 19:30 hs aprox.",
     departure: "Salida desde las 8:00 hs",
     availability: "Temporada regular",
-    location: "Alta Gracia · Dique Los Molinos · La Cumbrecita · Villa General Belgrano",
+    location:
+      "Alta Gracia · Dique Los Molinos · La Cumbrecita · Villa General Belgrano",
     badge: "Full day",
     featuredHome: true,
     featuredCollection: true,
@@ -571,23 +608,30 @@ const excursionRecords: ExcursionRecord[] = [
     itinerary: [
       {
         title: "Salida y contexto",
-        detail: "Primer tramo con city tour por Alta Gracia y lectura historica del corredor.",
+        detail:
+          "Primer tramo con city tour por Alta Gracia y lectura historica del corredor.",
       },
       {
         title: "Dique Los Molinos",
-        detail: "Parada con degustacion de productos artesanales antes de subir hacia el bosque.",
+        detail:
+          "Parada con degustacion de productos artesanales antes de subir hacia el bosque.",
       },
       {
         title: "La Cumbrecita",
-        detail: "Tiempo libre para senderos, cascada y paseo por el pueblo peatonal.",
+        detail:
+          "Tiempo libre para senderos, cascada y paseo por el pueblo peatonal.",
       },
       {
         title: "Villa General Belgrano",
-        detail: "Cierre con recorrido por la avenida principal, cervecerias y chocolaterias.",
+        detail:
+          "Cierre con recorrido por la avenida principal, cervecerias y chocolaterias.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Quien quiere caminar, mirar y hacer un full day con variedad" },
+      {
+        label: "Ideal para",
+        value: "Quien quiere caminar, mirar y hacer un full day con variedad",
+      },
       { label: "Salida", value: "8:00 hs aprox." },
       { label: "Regreso", value: "19:30 hs aprox." },
     ],
@@ -612,6 +656,86 @@ const excursionRecords: ExcursionRecord[] = [
       "Vive La Cumbrecita con Villa General Belgrano en una excursion full day desde Carlos Paz: senderos, cascada, degustacion y puerta a puerta.",
   },
   {
+    slug: "7-cascadas",
+    title: "Excursion 7 Cascadas en La Falda",
+    shortTitle: "7 Cascadas en La Falda",
+    editorialTitle:
+      "Agua serrana, curva de lago y una postal que cambia de tono en cada parada.",
+    teaser:
+      "Una salida de medio dia para leer el norte de Punilla entre perilago, vista a Cosquin y el recorrido clasico hacia las 7 Cascadas de La Falda.",
+    summary:
+      "Una excursion serrana pensada para quien quiere paisaje, ruta amable y una parada clasica del valle. Combina el Perilago San Roque, vistas abiertas hacia Cosquin y el encanto natural de 7 Cascadas en La Falda, con servicio puerta a puerta y acompanamiento de guia profesional.",
+    category: "excursion",
+    rhythm: "medio-dia",
+    duration: "Medio dia",
+    departure: "Salida a coordinar segun temporada",
+    availability: "Temporada regular",
+    location: "Perilago San Roque · Vista a Cosquin · La Falda",
+    badge: "Paisaje serrano",
+    featuredHome: false,
+    featuredCollection: true,
+    heroKicker: "Ruta con agua",
+    manifest:
+      "Una salida para cortar con la ciudad sin irse al extremo: lago, valle y cascadas en una misma lectura de sierra.",
+    includes: [
+      "Recorrido por el Perilago San Roque",
+      "Vista panoramica hacia Cosquin",
+      "Visita a 7 Cascadas en La Falda",
+      "Servicio puerta a puerta desde tu hotel",
+      "Acompanamiento de guia profesional",
+    ],
+    optional: [],
+    notes: [
+      "Ideal para quienes buscan una excursion serrana relajada y fotogenica.",
+      "El horario puede ajustarse segun temporada y punto de salida.",
+    ],
+    highlights: [
+      "Combina lago, valle y cascadas en una sola salida",
+      "Vista abierta hacia Cosquin durante el recorrido",
+      "Plan amable para hacer sin ocupar todo el dia",
+    ],
+    itinerary: [
+      {
+        title: "Salida desde Carlos Paz",
+        detail:
+          "Inicio del recorrido con servicio puerta a puerta y primer tramo bordeando el Perilago San Roque.",
+      },
+      {
+        title: "Vista hacia Cosquin",
+        detail:
+          "Paso panoramico con lectura del paisaje serrano y vistas abiertas del valle.",
+      },
+      {
+        title: "7 Cascadas en La Falda",
+        detail:
+          "Llegada al sector de cascadas para disfrutar la parada principal de la excursion antes del regreso.",
+      },
+    ],
+    usefulInfo: [
+      {
+        label: "Ideal para",
+        value: "Familias, parejas y viajeros que quieren paisaje sin full day",
+      },
+      { label: "Modalidad", value: "Excursion de medio dia" },
+      { label: "Incluye", value: "Puerta a puerta y guia profesional" },
+    ],
+    relatedSlugs: ["valle-de-punilla", "aerosilla", "city-tour-lacustre"],
+    visual: {
+      eyebrow: "La Falda",
+      scene: "Agua serrana, piedra clara y ruta con vista al valle",
+      alt: "Vista de 7 Cascadas en La Falda con agua serrana entre piedra y vegetacion",
+      palette: {
+        base: "#23443a",
+        accent: "#ecf93e",
+        glow: "rgba(72, 212, 168, 0.30)",
+        contrast: "#f3f8f4",
+      },
+    },
+    seoTitle: "Excursion 7 Cascadas en La Falda | Cari Turismo",
+    seoDescription:
+      "Descubre 7 Cascadas en La Falda con Perilago San Roque, vista a Cosquin, servicio puerta a puerta y guia profesional. Reserva facil con Cari Turismo.",
+  },
+  {
     slug: "altas-cumbres-tuneles",
     title: "Excursion Altas Cumbres con Los Tuneles",
     shortTitle: "Altas Cumbres con Los Tuneles",
@@ -625,7 +749,8 @@ const excursionRecords: ExcursionRecord[] = [
     duration: "7:00 a 19:00 hs aprox.",
     departure: "Salida desde las 7:00 hs",
     availability: "Temporada regular",
-    location: "Camino de las Altas Cumbres · Taninga · Mina Clavero · Cura Brochero",
+    location:
+      "Camino de las Altas Cumbres · Taninga · Mina Clavero · Cura Brochero",
     badge: "Mas pedida",
     featuredHome: true,
     featuredCollection: true,
@@ -654,23 +779,33 @@ const excursionRecords: ExcursionRecord[] = [
     itinerary: [
       {
         title: "Ascenso por Altas Cumbres",
-        detail: "Subida progresiva hasta los 1450 msnm con paradas de lectura del paisaje.",
+        detail:
+          "Subida progresiva hasta los 1450 msnm con paradas de lectura del paisaje.",
       },
       {
         title: "Quebradas y tuneles",
-        detail: "Paso por Quebrada del Batan, Desierto de Piedras y luego la Quebrada La Mermela con cinco tuneles.",
+        detail:
+          "Paso por Quebrada del Batan, Desierto de Piedras y luego la Quebrada La Mermela con cinco tuneles.",
       },
       {
         title: "Oeste cordobes",
-        detail: "Tiempo para almuerzo opcional en Taninga y visitas a Mina Clavero y Cura Brochero.",
+        detail:
+          "Tiempo para almuerzo opcional en Taninga y visitas a Mina Clavero y Cura Brochero.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Quien busca el paisaje mas potente de la provincia" },
+      {
+        label: "Ideal para",
+        value: "Quien busca el paisaje mas potente de la provincia",
+      },
       { label: "Salida", value: "7:00 hs aprox." },
       { label: "Regreso", value: "19:00 hs aprox." },
     ],
-    relatedSlugs: ["cascada-escondida", "valle-de-punilla", "la-cumbrecita-villa-general-belgrano"],
+    relatedSlugs: [
+      "cascada-escondida",
+      "valle-de-punilla",
+      "la-cumbrecita-villa-general-belgrano",
+    ],
     visual: {
       eyebrow: "1450 msnm",
       scene: "Cornisas, tuneles y horizonte abierto",
@@ -733,19 +868,28 @@ const excursionRecords: ExcursionRecord[] = [
       },
       {
         title: "Tramo de aventura",
-        detail: "Caminata regenerativa y acceso a la cascada oculta entre granito.",
+        detail:
+          "Caminata regenerativa y acceso a la cascada oculta entre granito.",
       },
       {
         title: "Tiempo activo y relax",
-        detail: "Kayak, cabalgata y rato libre para disfrutar el balneario antes del regreso.",
+        detail:
+          "Kayak, cabalgata y rato libre para disfrutar el balneario antes del regreso.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Familias activas y viajeros que buscan naturaleza real" },
+      {
+        label: "Ideal para",
+        value: "Familias activas y viajeros que buscan naturaleza real",
+      },
       { label: "Temporada", value: "Disponible solo en enero y febrero" },
       { label: "Dificultad", value: "Baja" },
     ],
-    relatedSlugs: ["altas-cumbres-tuneles", "la-cumbrecita-villa-general-belgrano", "valle-de-punilla"],
+    relatedSlugs: [
+      "altas-cumbres-tuneles",
+      "la-cumbrecita-villa-general-belgrano",
+      "valle-de-punilla",
+    ],
     visual: {
       eyebrow: "Caverna natural",
       scene: "Granito oscuro, espejo de agua y vegetacion cerrada",
@@ -805,23 +949,33 @@ const excursionRecords: ExcursionRecord[] = [
     itinerary: [
       {
         title: "Brief inicial",
-        detail: "Definicion de horarios, cantidad de pasajeros, equipaje y puntos clave.",
+        detail:
+          "Definicion de horarios, cantidad de pasajeros, equipaje y puntos clave.",
       },
       {
         title: "Curaduria de vehiculo",
-        detail: "Asignacion del tipo de movilidad mas conveniente para el plan.",
+        detail:
+          "Asignacion del tipo de movilidad mas conveniente para el plan.",
       },
       {
         title: "Ejecucion puntual",
-        detail: "Seguimiento de la operacion para que el traslado se sienta simple.",
+        detail:
+          "Seguimiento de la operacion para que el traslado se sienta simple.",
       },
     ],
     usefulInfo: [
-      { label: "Ideal para", value: "Eventos, grupos, empresas y planes personalizados" },
+      {
+        label: "Ideal para",
+        value: "Eventos, grupos, empresas y planes personalizados",
+      },
       { label: "Modalidad", value: "A medida" },
       { label: "Valor", value: "Comodidad, seguridad y conocimiento local" },
     ],
-    relatedSlugs: ["city-bus-turistico-grupos", "city-tour-lacustre", "altas-cumbres-tuneles"],
+    relatedSlugs: [
+      "city-bus-turistico-grupos",
+      "city-tour-lacustre",
+      "altas-cumbres-tuneles",
+    ],
     visual: {
       eyebrow: "Movilidad",
       scene: "Ruta nocturna, luces bajas y servicio puerta a puerta",
@@ -866,8 +1020,10 @@ export function getExcursionsByRhythm(rhythm?: string) {
 
 export function getFilteredExcursions(category?: string, rhythm?: string) {
   return excursions.filter((excursion) => {
-    const matchesCategory = !category || category === "all" || excursion.category === category;
-    const matchesRhythm = !rhythm || rhythm === "all" || excursion.rhythm === rhythm;
+    const matchesCategory =
+      !category || category === "all" || excursion.category === category;
+    const matchesRhythm =
+      !rhythm || rhythm === "all" || excursion.rhythm === rhythm;
 
     return matchesCategory && matchesRhythm;
   });
