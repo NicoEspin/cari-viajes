@@ -658,72 +658,74 @@ const excursionRecords: ExcursionRecord[] = [
   {
     slug: "7-cascadas",
     title: "Excursion 7 Cascadas en La Falda",
-    shortTitle: "7 Cascadas en La Falda",
+    shortTitle: "7 Cascadas",
     editorialTitle:
-      "Agua serrana, curva de lago y una postal que cambia de tono en cada parada.",
+      "Agua, verano y una salida pensada para disfrutar sin apuro.",
     teaser:
-      "Una salida de medio dia para leer el norte de Punilla entre perilago, vista a Cosquin y el recorrido clasico hacia las 7 Cascadas de La Falda.",
+      "Una excursion de medio dia ideal para toda la familia, con recorrido por el perilago San Roque, parada en Cosquin y tarde libre en el complejo 7 Cascadas de La Falda.",
     summary:
-      "Una excursion serrana pensada para quien quiere paisaje, ruta amable y una parada clasica del valle. Combina el Perilago San Roque, vistas abiertas hacia Cosquin y el encanto natural de 7 Cascadas en La Falda, con servicio puerta a puerta y acompanamiento de guia profesional.",
+      "Una salida de verano para quienes quieren combinar ruta serrana, paisaje y tiempo de disfrute real en destino. El traslado es directo hacia La Falda, pasando por todo el perilago San Roque y con una parada en Cosquin, antes de llegar al complejo 7 Cascadas para aprovechar sus piletas, toboganes, servicios gastronomicos, feria artesanal y cascadas.",
     category: "excursion",
     rhythm: "medio-dia",
     duration: "Medio dia",
-    departure: "Salida a coordinar segun temporada",
-    availability: "Temporada regular",
-    location: "Perilago San Roque · Vista a Cosquin · La Falda",
-    badge: "Paisaje serrano",
+    departure: "Salida por la tarde",
+    availability: "Solo enero y febrero",
+    location: "Perilago San Roque · Cosquin · La Falda",
+    badge: "Verano",
     featuredHome: false,
     featuredCollection: true,
-    heroKicker: "Ruta con agua",
+    heroKicker: "Plan familiar",
     manifest:
-      "Una salida para cortar con la ciudad sin irse al extremo: lago, valle y cascadas en una misma lectura de sierra.",
+      "Una salida simple y bien resuelta para el verano: ruta amable, paisaje serrano y horas reales para disfrutar el complejo sin complicaciones.",
     includes: [
-      "Recorrido por el Perilago San Roque",
-      "Vista panoramica hacia Cosquin",
-      "Visita a 7 Cascadas en La Falda",
+      "Recorrido por todo el perilago San Roque",
+      "Parada en Cosquin",
+      "Traslado directo al complejo 7 Cascadas en La Falda",
+      "Tiempo libre para disfrutar del complejo",
       "Servicio puerta a puerta desde tu hotel",
       "Acompanamiento de guia profesional",
     ],
     optional: [],
     notes: [
-      "Ideal para quienes buscan una excursion serrana relajada y fotogenica.",
-      "El horario puede ajustarse segun temporada y punto de salida.",
+      "Disponible unicamente durante enero y febrero.",
+      "Regreso estimado 19:30 hs aprox.",
+      "Ideal para toda la familia.",
     ],
     highlights: [
-      "Combina lago, valle y cascadas en una sola salida",
-      "Vista abierta hacia Cosquin durante el recorrido",
-      "Plan amable para hacer sin ocupar todo el dia",
+      "Plan de verano pensado para disfrutar en familia",
+      "Incluye recorrido por el perilago y parada en Cosquin",
+      "Tiempo libre en el complejo con piletas, toboganes y servicios",
     ],
     itinerary: [
       {
-        title: "Salida desde Carlos Paz",
+        title: "Salida desde el hotel",
         detail:
-          "Inicio del recorrido con servicio puerta a puerta y primer tramo bordeando el Perilago San Roque.",
+          "Retiro puerta a puerta y comienzo del recorrido por el perilago San Roque camino a La Falda.",
       },
       {
-        title: "Vista hacia Cosquin",
+        title: "Parada en Cosquin",
         detail:
-          "Paso panoramico con lectura del paisaje serrano y vistas abiertas del valle.",
+          "Detencion breve durante el traslado, aprovechando el paso por la ciudad antes de continuar hacia destino.",
       },
       {
-        title: "7 Cascadas en La Falda",
+        title: "Complejo 7 Cascadas",
         detail:
-          "Llegada al sector de cascadas para disfrutar la parada principal de la excursion antes del regreso.",
+          "Llegada a La Falda para disfrutar del complejo con sus cascadas, piletas, toboganes, espacios gastronomicos y feria artesanal.",
       },
     ],
     usefulInfo: [
       {
         label: "Ideal para",
-        value: "Familias, parejas y viajeros que quieren paisaje sin full day",
+        value: "Familias y quienes buscan un plan de verano relajado",
       },
-      { label: "Modalidad", value: "Excursion de medio dia" },
-      { label: "Incluye", value: "Puerta a puerta y guia profesional" },
+      { label: "Temporada", value: "Solo enero y febrero" },
+      { label: "Regreso", value: "19:30 hs aprox." },
     ],
-    relatedSlugs: ["valle-de-punilla", "aerosilla", "city-tour-lacustre"],
+    relatedSlugs: ["valle-de-punilla", "city-tour-lacustre", "aerosilla"],
     visual: {
       eyebrow: "La Falda",
-      scene: "Agua serrana, piedra clara y ruta con vista al valle",
-      alt: "Vista de 7 Cascadas en La Falda con agua serrana entre piedra y vegetacion",
+      scene: "Cascadas, verano serrano y complejo al aire libre",
+      alt: "Placeholder editorial de la excursion 7 Cascadas en La Falda",
       palette: {
         base: "#23443a",
         accent: "#ecf93e",
@@ -733,7 +735,7 @@ const excursionRecords: ExcursionRecord[] = [
     },
     seoTitle: "Excursion 7 Cascadas en La Falda | Cari Turismo",
     seoDescription:
-      "Descubre 7 Cascadas en La Falda con Perilago San Roque, vista a Cosquin, servicio puerta a puerta y guia profesional. Reserva facil con Cari Turismo.",
+      "Reserva la excursion 7 Cascadas en La Falda con recorrido por el perilago San Roque, parada en Cosquin y servicio puerta a puerta. Ideal para toda la familia en verano.",
   },
   {
     slug: "altas-cumbres-tuneles",
