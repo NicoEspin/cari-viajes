@@ -408,7 +408,7 @@ export function ExcursionsIndexPage({
         />
         <div className="relative mx-auto grid w-full max-w-[1200px] gap-10 lg:grid-cols-[minmax(0,1.04fr)_minmax(320px,0.78fr)] lg:items-start lg:gap-14">
           <div className="max-w-[720px] self-start">
-            <SectionEyebrow>Mapa Curado</SectionEyebrow>
+            <SectionEyebrow>Experiencias únicas</SectionEyebrow>
             <h2 className="mt-5 max-w-[12ch] font-display text-[clamp(3rem,7vw,6rem)] leading-[0.96] tracking-[-0.03em] text-white">
               Excursiones en Córdoba con criterio local.
             </h2>
@@ -418,8 +418,7 @@ export function ExcursionsIndexPage({
             <div className="w-full max-w-[420px] space-y-6 border border-white/12 bg-[linear-gradient(180deg,rgba(7,12,17,0.84)_0%,rgba(7,12,17,0.72)_100%)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.26)] backdrop-blur-[14px] md:p-7">
               <p className="max-w-[34ch] text-[0.98rem] leading-8 text-[rgba(245,240,232,0.76)]">
                 No armamos una grilla plana de salidas. Armamos una coleccion de experiencias,
-                atractivos y traslados para explorar Carlos Paz, la sierra y sus alrededores con un tono
-                mas editorial, directo y facil de convertir en WhatsApp.
+                atractivos y traslados para explorar Carlos Paz, la sierra y sus alrededores.
               </p>
               <div className="flex flex-wrap gap-3 text-[0.66rem] tracking-[0.2em] uppercase text-[rgba(245,240,232,0.52)]">
                 <span>{filtered.length} experiencias activas</span>

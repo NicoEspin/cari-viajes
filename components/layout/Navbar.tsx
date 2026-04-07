@@ -21,7 +21,6 @@ function getClipValues(originX: number, originY: number) {
 }
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuId = useId();
 
@@ -59,13 +58,6 @@ export function Navbar() {
       y: rect.top + rect.height / 2,
     };
   };
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -283,11 +275,7 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-          scrolled || isMenuOpen
-            ? "border-b border-white/10 bg-[rgba(13,13,11,0.93)] backdrop-blur-xl"
-            : "bg-transparent"
-        }`}
+        className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[rgba(13,13,11,0.93)] backdrop-blur-xl transition-all duration-500"
       >
         <nav className="mx-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between px-6 md:px-12">
           <Link
