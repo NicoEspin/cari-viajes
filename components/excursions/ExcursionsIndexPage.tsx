@@ -445,28 +445,7 @@ export function ExcursionsIndexPage({
         </div>
       </section>
 
-      <section className="border-b border-[var(--border-default)] px-5 py-16 md:px-10 md:py-20">
-        <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-          <div className="space-y-4">
-            <SectionEyebrow withLine>Manifiesto</SectionEyebrow>
-            <h2 className="font-display text-[2.3rem] leading-[1.02] text-[var(--text-primary)] md:text-[3.4rem]">
-              Menos catalogo. Mas lectura del viaje.
-            </h2>
-          </div>
-          <div className="grid gap-6 text-[0.96rem] leading-8 text-[var(--text-secondary)] md:grid-cols-2">
-            <p>
-              Cari Turismo trabaja la ciudad como base, la sierra como narrativa y WhatsApp como el
-              canal donde se termina de afinar el plan. Por eso cada ficha ya nace con logistica,
-              tono, ritmo y CTA claros.
-            </p>
-            <p>
-              Tenes atracciones urbanas, recorridos de medio dia, full days, turismo aventura,
-              formatos para grupos y traslados especiales sin romper la identidad premium que ya vive
-              en la home.
-            </p>
-          </div>
-        </div>
-      </section>
+  
 
       <section id="listado" className="scroll-mt-24 px-5 py-16 md:scroll-mt-28 md:px-10 md:py-20">
         <div className="mx-auto max-w-[1200px] space-y-8">

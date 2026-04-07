@@ -74,10 +74,8 @@ export function ExperiencesSection() {
             <h2
               className="font-display mt-5 text-[56px] leading-none font-light tracking-tight text-[var(--text-primary)] md:text-[72px]"
             >
-              Cada salida,{" "}
-              <em className="italic text-[var(--brand-primary)]">curada</em>
-              <br />
-              al detalle.
+             Salidas bien elegidas,{" "}
+              <em className="italic text-[var(--brand-primary)]">para viajar mejor</em>
             </h2>
           </div>
 

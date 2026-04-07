@@ -62,9 +62,9 @@ export function ValuePropSection() {
               className="mt-5 max-w-[11ch] font-display text-[42px] font-normal leading-[0.98] tracking-tight text-[var(--text-primary)] md:text-[60px]"
               data-reveal
             >
-              No somos una agencia.{" "}
+              Vivimos Carlos Paz,{" "}
               <em className="italic text-[var(--brand-primary)]">
-                Somos los que vivimos acá.
+                por eso te guiamos mejor
               </em>
             </h2>
 
