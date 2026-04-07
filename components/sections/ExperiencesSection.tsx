@@ -127,7 +127,7 @@ export function ExperiencesSection() {
         {/* ── Bottom bar ─────────────────────────────────────── */}
         <div className="mt-[var(--home-section-footer-gap)] flex flex-col items-start gap-4 bg-[var(--text-primary)] px-7 py-5 md:mt-[var(--home-section-footer-gap-lg)] md:flex-row md:items-center md:justify-between">
           <span className="text-[10px] tracking-[0.16em] uppercase text-white/50">
-            {excursions.length} experiencias curadas en la data central
+            {excursions.length} experiencias únicas
           </span>
           <Link
             href="/excursiones"
