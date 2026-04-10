@@ -207,7 +207,7 @@ export function HeroSection() {
       id="hero"
       aria-label="Inicio"
       className="hero-section relative isolate overflow-hidden scroll-mt-24
-        flex h-[100svh] flex-col
+        flex min-h-[100svh] flex-col
         md:flex-row md:min-h-screen md:h-auto md:items-end md:px-10 md:pb-20 md:pt-28 md:scroll-mt-28"
     >
       <div
@@ -218,7 +218,7 @@ export function HeroSection() {
       <GeometricShapes />
 
       {/* ═══════════════════ MOBILE ═══════════════════ */}
-      <div className="flex h-full flex-col md:hidden">
+      <div className="flex min-h-[100svh] flex-col md:hidden">
         {/* Image block — altura fija controlada */}
         <div
           className="relative mx-5 mt-16 flex-shrink-0"
