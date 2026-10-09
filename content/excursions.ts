@@ -322,8 +322,8 @@ const excursionRecords: ExcursionRecord[] = [
   },
   {
     slug: "city-bus-turistico-grupos",
-    title: "City Bus Turistico para Grupos",
-    shortTitle: "City Bus para Grupos",
+    title: "City Tour Turistico para Grupos",
+    shortTitle: "City Tour para Grupos",
     editorialTitle: "La ciudad en clave de grupo, sin perder ritmo.",
     teaser:
       "Recorrido de dos horas por los puntos principales de Carlos Paz, con guia, show humoristico musical y servicio puerta a puerta desde el hotel.",
@@ -389,7 +389,7 @@ const excursionRecords: ExcursionRecord[] = [
     visual: {
       eyebrow: "Ruta urbana",
       scene: "Bus, marquesinas y carteles de ruta",
-      alt: "Placeholder editorial del City Bus Turistico para grupos en Carlos Paz",
+      alt: "Placeholder editorial del City Tour Turistico para grupos en Carlos Paz",
       palette: {
         base: "#4b2f1f",
         accent: "#fccb3e",
@@ -397,9 +397,9 @@ const excursionRecords: ExcursionRecord[] = [
         contrast: "#f7efe7",
       },
     },
-    seoTitle: "City Bus Turistico para grupos en Carlos Paz | Cari Turismo",
+    seoTitle: "City Tour Turistico para grupos en Carlos Paz | Cari Turismo",
     seoDescription:
-      "Organiza un City Bus Turistico para grupos en Carlos Paz con guia, show humoristico musical y servicio puerta a puerta desde el hotel.",
+      "Organiza un City Tour Turistico para grupos en Carlos Paz con guia, show humoristico musical y servicio puerta a puerta desde el hotel.",
   },
   {
     slug: "valle-de-punilla",
@@ -480,6 +480,84 @@ const excursionRecords: ExcursionRecord[] = [
     seoTitle: "Excursion Valle de Punilla | Medio dia desde Carlos Paz",
     seoDescription:
       "Descubre el Valle de Punilla en una excursion de medio dia desde Carlos Paz con puerta a puerta, paradas clasicas y opcion de sumar Los Cocos.",
+  },
+  {
+    slug: "tren-de-las-sierras",
+    title: "Tren de las Sierras",
+    shortTitle: "Tren de las Sierras",
+    editorialTitle: "La sierra cambia de ritmo cuando el viaje sigue las vias.",
+    teaser:
+      "Una experiencia en tren entre montanas, rios, valles y pueblos serranos para descubrir Cordoba desde otra perspectiva.",
+    summary:
+      "Un viaje a bordo del Tren de las Sierras para recorrer paisajes de Cordoba con calma, naturaleza y una dosis de aventura. Una experiencia diferente para sumar a las vacaciones.",
+    category: "excursion",
+    rhythm: "aventura",
+    duration: "A confirmar al reservar",
+    departure: "Salidas programadas, excepto domingos",
+    availability: "No disponible los domingos ni en enero y febrero",
+    location: "Sierras de Cordoba",
+    badge: "Fuera de temporada alta",
+    featuredHome: false,
+    featuredCollection: false,
+    heroKicker: "Viaje sobre rieles",
+    manifest:
+      "Naturaleza, pueblos serranos y la magia de viajar en tren, con tiempo para mirar Cordoba de una manera diferente.",
+    includes: [
+      "Experiencia a bordo del Tren de las Sierras",
+      "Recorrido entre montanas, rios y valles",
+      "Paso por paisajes y pueblos serranos",
+      "Una forma tranquila y diferente de conocer Cordoba",
+    ],
+    optional: [],
+    notes: [
+      "Importante: la excursion no se realiza los domingos ni durante enero y febrero.",
+      "La disponibilidad y los horarios deben confirmarse antes de reservar.",
+    ],
+    highlights: [
+      "Paisajes serranos vistos desde el tren",
+      "Combina tranquilidad, naturaleza y aventura",
+      "Una experiencia distinta para las vacaciones",
+    ],
+    itinerary: [
+      {
+        title: "Embarque",
+        detail:
+          "Inicio de la experiencia a bordo y preparacion para recorrer el corredor serrano.",
+      },
+      {
+        title: "Recorrido por las sierras",
+        detail:
+          "Viaje entre montanas, rios y valles con el paisaje de Cordoba como protagonista.",
+      },
+      {
+        title: "Pueblos y postales",
+        detail:
+          "Paso por pueblos serranos y escenas naturales que muestran otra cara de la provincia.",
+      },
+    ],
+    usefulInfo: [
+      {
+        label: "Ideal para",
+        value: "Viajeros que buscan paisaje, calma y una experiencia diferente",
+      },
+      { label: "Dias", value: "No se realiza los domingos" },
+      { label: "Temporada", value: "No disponible en enero y febrero" },
+    ],
+    relatedSlugs: ["valle-de-punilla", "city-tour-lacustre", "aerosilla"],
+    visual: {
+      eyebrow: "Sierras sobre rieles",
+      scene: "Tren, vias y paisaje serrano abierto",
+      alt: "Tren de las Sierras recorriendo el paisaje de Cordoba",
+      palette: {
+        base: "#173f3a",
+        accent: "#fccb3e",
+        glow: "rgba(74, 171, 154, 0.32)",
+        contrast: "#f4f8f2",
+      },
+    },
+    seoTitle: "Tren de las Sierras desde Carlos Paz | Cari Turismo",
+    seoDescription:
+      "Descubri el Tren de las Sierras y recorre montanas, rios, valles y pueblos de Cordoba. Consulta disponibilidad y reserva con Cari Turismo.",
   },
   {
     slug: "dique-los-molinos-villa-general-belgrano",

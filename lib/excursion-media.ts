@@ -39,6 +39,11 @@ import lacustreGallery2 from "@/app/assets/lacustre/gallery-2.webp";
 import lacustreGallery4 from "@/app/assets/lacustre/gallery-4.webp";
 import lacustreHero from "@/app/assets/lacustre/lacustre-hero.webp";
 import excursionesLogo from "@/app/assets/logo-excurciones.jpg";
+import trenSierrasGallery1 from "@/app/assets/tren-de-las-cierras/gallery-1.webp";
+import trenSierrasGallery2 from "@/app/assets/tren-de-las-cierras/gallery-2.webp";
+import trenSierrasGallery3 from "@/app/assets/tren-de-las-cierras/gallery-3.webp";
+import trenSierrasGallery4 from "@/app/assets/tren-de-las-cierras/gallery-4.webp";
+import trenSierrasHero from "@/app/assets/tren-de-las-cierras/tren-de-las-cierras-hero.webp";
 import vallePunillaGallery1 from "@/app/assets/valle-punilla/gallery-1.webp";
 import vallePunillaGallery2 from "@/app/assets/valle-punilla/gallery-2.webp";
 import vallePunillaGallery3 from "@/app/assets/valle-punilla/gallery-3.webp";
@@ -82,6 +87,7 @@ export const excursionFolderKeyBySlug = {
   "city-tour-lacustre": "lacustre",
   "dique-los-molinos-villa-general-belgrano": "vgralbelgrano",
   "la-cumbrecita-villa-general-belgrano": "cumbrecita",
+  "tren-de-las-sierras": "tren-de-las-cierras",
   "valle-de-punilla": "valle-punilla",
 } as const satisfies Partial<Record<string, string>>;
 
@@ -193,6 +199,17 @@ const excursionMediaBySlug: Record<string, ExcursionMedia> = {
       mediaImage(excursionesLogo, "Marca Cari Turismo aplicada al servicio de traslados especiales", "center center"),
       mediaImage(genericExcursionsHero, "Visual de apoyo para traslados especiales con tono turistico premium", "center 32%"),
       mediaImage(excursionesLogo, "Identidad de Cari Turismo como respaldo visual del servicio de traslados", "center center"),
+    ],
+  },
+  "tren-de-las-sierras": {
+    folderKey: excursionFolderKeyBySlug["tren-de-las-sierras"],
+    hero: mediaImage(trenSierrasHero, "Tren de las Sierras avanzando entre vegetacion y viviendas serranas", "center 58%"),
+    gallerySource: "real",
+    gallery: [
+      mediaImage(trenSierrasGallery1, "Tren de las Sierras recorriendo un corredor natural entre montanas", "center center"),
+      mediaImage(trenSierrasGallery2, "Tren de las Sierras cruzando un puente sobre un rio de Cordoba", "center center"),
+      mediaImage(trenSierrasGallery3, "Pasajeros junto al Tren de las Sierras en una parada serrana", "center center"),
+      mediaImage(trenSierrasGallery4, "Tren de las Sierras detenido en la estacion La Calera", "center center"),
     ],
   },
   "valle-de-punilla": {
